@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudiar Teoría de Programación</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Estudiar Teoría de Programación</h1>
+        </header>
+
+        <!-- Vista de índice de temas -->
+        <div id="index-view" class="view active">
+            <h2>Selecciona un tema</h2>
+            <div id="temas-list" class="temas-grid">
+                <!-- Los temas se cargarán dinámicamente -->
+            </div>
+        </div>
+
+        <!-- Vista de opciones del tema -->
+        <div id="tema-view" class="view">
+            <button class="back-button" onclick="mostrarIndice()">← Volver al índice</button>
+            <h2 id="tema-titulo"></h2>
+            <div class="opciones-tema">
+                <button class="opcion-btn" onclick="mostrarLectura()">
+                    <span class="icon">📖</span>
+                    <span>Leer Preguntas</span>
+                </button>
+                <button class="opcion-btn" onclick="iniciarTestAleatorio()">
+                    <span class="icon">🎲</span>
+                    <span>Test Aleatorio</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Vista de lectura de preguntas -->
+        <div id="lectura-view" class="view">
+            <button class="back-button" onclick="mostrarOpcionesTema()">← Volver</button>
+            <h2 id="lectura-titulo"></h2>
+            <div id="preguntas-container" class="preguntas-lista">
+                <!-- Las preguntas se cargarán dinámicamente -->
+            </div>
+        </div>
+
+        <!-- Vista de test aleatorio -->
+        <div id="test-view" class="view">
+            <div class="test-header">
+                <div class="test-stats">
+                    <span id="pregunta-actual">1</span> / <span id="total-preguntas">0</span>
+                    <span class="separator">|</span>
+                    <span>Correctas: <span id="correctas-count">0</span></span>
+                    <span class="separator">|</span>
+                    <span>Incorrectas: <span id="incorrectas-count">0</span></span>
+                </div>
+                <button class="back-button" onclick="mostrarOpcionesTema()">Terminar Test</button>
+            </div>
+            
+            <div class="test-content">
+                <div id="pregunta-test" class="pregunta-test">
+                    <!-- La pregunta del test se cargará aquí -->
+                </div>
+                <div id="opciones-test" class="opciones-test">
+                    <!-- Las opciones se cargarán aquí -->
+                </div>
+                <div id="resultado-test" class="resultado-test hidden">
+                    <!-- El resultado se mostrará aquí -->
+                </div>
+                <button id="siguiente-btn" class="btn-siguiente hidden" onclick="siguientePregunta()">Siguiente Pregunta</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+
+

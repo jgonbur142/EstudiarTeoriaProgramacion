@@ -1,0 +1,48 @@
+# Archivos del sistema
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Archivos de editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# Archivos temporales
+*.tmp
+*.log
+*.cache
+*.bak
+*.backup
+
+# Archivos de Node (si los usas en el futuro)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Archivos de build (si los usas)
+dist/
+build/
+*.min.js
+*.min.css
+
+# Archivos de documentación generados
+docs/
+
+# Archivos de configuración local
+.env
+.env.local
+config.local.js
+
