@@ -18,6 +18,12 @@
             <div id="temas-list" class="temas-grid">
                 <!-- Los temas se cargarán dinámicamente -->
             </div>
+            <div id="test-global-container" style="margin-top: 30px; text-align: center;">
+                <div id="test-global-card" class="tema-card" style="max-width: 300px; margin: 0 auto; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <h3>🌍 Test Global</h3>
+                    <p>Test con todas las preguntas</p>
+                </div>
+            </div>
         </div>
 
         <!-- Vista de opciones del tema -->
@@ -55,7 +61,7 @@
                     <span class="separator">|</span>
                     <span>Incorrectas: <span id="incorrectas-count">0</span></span>
                 </div>
-                <button class="back-button" onclick="mostrarOpcionesTema()">Terminar Test</button>
+                <button class="back-button" onclick="terminarTestDesdeBoton()">Terminar Test</button>
             </div>
             
             <div class="test-content">
@@ -77,5 +83,9 @@
     <script src="app.js"></script>
 </body>
 </html>
+
+
+
+
 
 

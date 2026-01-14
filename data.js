@@ -1549,8 +1549,777 @@ const temasData = {
                 ]
             }
         }
+    },
+    tema7: {
+        id: 7,
+        titulo: "Tema 7 - Herencia",
+        subtemas: {
+            "7.1": {
+                titulo: "Tema 7 - Herencia",
+                preguntas: [
+                    {
+                        id: 1,
+                        texto: "Si una clase no especifica explícitamente una superclase con 'extends', ¿de qué clase hereda automáticamente?",
+                        opciones: [
+                            "Base",
+                            "System",
+                            "java.lang.Object",
+                            "Main"
+                        ],
+                        correcta: 2
+                    },
+                    {
+                        id: 2,
+                        texto: "¿Cuál de los siguientes miembros de una clase NO se hereda en una subclase?",
+                        opciones: [
+                            "Los atributos públicos",
+                            "Los métodos estáticos públicos",
+                            "Los métodos protegidos",
+                            "Los constructores"
+                        ],
+                        correcta: 3
+                    },
+                    {
+                        id: 3,
+                        texto: "Al anular un método (Overriding), ¿qué debe coincidir exactamente?",
+                        opciones: [
+                            "El número de parámetros, aunque los tipos sean distintos",
+                            "Solo el nombre del método",
+                            "Solo el tipo de retorno",
+                            "La firma (nombre y parámetros) y el tipo de retorno"
+                        ],
+                        correcta: 3
+                    },
+                    {
+                        id: 4,
+                        texto: "¿Qué sucede si intentas llamar a 'super()' después de haber escrito otras líneas de código en un constructor?",
+                        opciones: [
+                            "El programa funciona normalmente",
+                            "El objeto se inicializa dos veces",
+                            "Se produce una excepción en tiempo de ejecución",
+                            "Se produce un error de compilación"
+                        ],
+                        correcta: 3
+                    },
+                    {
+                        id: 5,
+                        texto: "¿Para qué sirve el método 'toString()' heredado de Object?",
+                        opciones: [
+                            "Para clonar el objeto",
+                            "Para obtener una representación en texto del objeto",
+                            "Para comparar si dos objetos son iguales",
+                            "Para convertir una cadena en un objeto"
+                        ],
+                        correcta: 1
+                    },
+                    {
+                        id: 6,
+                        texto: "¿Para qué se usa el casting en herencia?",
+                        opciones: [
+                            "Eliminar un objeto de la memoria",
+                            "Convertir una referencia de superclase a una de subclase",
+                            "Convertir una referencia de subclase a una de superclase",
+                            "Llamar a un método privado desde fuera de la clase"
+                        ],
+                        correcta: 2
+                    },
+                    {
+                        id: 7,
+                        texto: "¿Cuál es el propósito del operador 'instanceof'?",
+                        opciones: [
+                            "Crear una nueva instancia de una clase",
+                            "Destruir una instancia",
+                            "Obtener el nombre de la clase de un objeto",
+                            "Comprobar si un objeto pertenece a una clase determinada"
+                        ],
+                        correcta: 3
+                    },
+                    {
+                        id: 8,
+                        texto: "Si una clase se declara con el modificador 'final', ¿qué consecuencia tiene?",
+                        opciones: [
+                            "La clase debe implementarse obligatoriamente",
+                            "La clase no puede ser heredada",
+                            "Todos sus métodos son automáticamente privados",
+                            "No se pueden crear objetos de esa clase"
+                        ],
+                        correcta: 1
+                    },
+                    {
+                        id: 9,
+                        texto: "¿Qué ocurre si un método se declara como 'final' en la superclase?",
+                        opciones: [
+                            "No puede ser llamado por las subclases",
+                            "Debe ser sobrescrito obligatoriamente",
+                            "El método debe ser estático",
+                            "Las subclases no pueden anularlo"
+                        ],
+                        correcta: 3
+                    },
+                    {
+                        id: 10,
+                        texto: "¿Cuál es la característica principal del polimorfismo en Java?",
+                        opciones: [
+                            "Permite que una clase tenga múltiples constructores",
+                            "Obliga a que todas las clases tengan los mismos atributos",
+                            "Permite que un método devuelva múltiples valores",
+                            "Permite que una variable de tipo superclase referencie objetos de sus subclases"
+                        ],
+                        correcta: 3
+                    },
+                    {
+                        id: 11,
+                        texto: "¿Qué define a una clase abstracta?",
+                        opciones: [
+                            "Es una clase que no puede tener subclases",
+                            "Es una clase que solo contiene métodos estáticos",
+                            "Es una clase de la que no se pueden instanciar objetos directamente",
+                            "Es una clase que no tiene métodos"
+                        ],
+                        correcta: 2
+                    },
+                    {
+                        id: 12,
+                        texto: "¿Qué es un método abstracto?",
+                        opciones: [
+                            "Un método que solo puede ser privado",
+                            "Un método declarado pero sin cuerpo (sin implementación)",
+                            "Un método que no devuelve nada (void)",
+                            "Un método que se ejecuta automáticamente al iniciar la clase"
+                        ],
+                        correcta: 1
+                    },
+                    {
+                        id: 13,
+                        texto: "¿Puede una clase concreta contener un método abstracto?",
+                        opciones: [
+                            "Solo si la clase implementa una interfaz",
+                            "Sí, siempre que el método sea público",
+                            "Sí, pero el método no podrá ser llamado",
+                            "No, si una clase tiene al menos un método abstracto, la clase debe ser abstracta"
+                        ],
+                        correcta: 3
+                    },
+                    {
+                        id: 14,
+                        texto: "¿Qué palabra reservada usa una clase para adoptar una Interfaz?",
+                        opciones: [
+                            "extends",
+                            "implements",
+                            "uses",
+                            "includes"
+                        ],
+                        correcta: 1
+                    },
+                    {
+                        id: 15,
+                        texto: "Sobre las interfaces, ¿qué afirmación es correcta respecto a la herencia múltiple?",
+                        opciones: [
+                            "Una clase solo puede implementar una interfaz a la vez",
+                            "Una clase puede implementar múltiples interfaces",
+                            "Una interfaz solo puede ser implementada por una clase",
+                            "Las interfaces no permiten herencia de ningún tipo"
+                        ],
+                        correcta: 1
+                    },
+                    {
+                        id: 16,
+                        texto: "¿Cómo son, por defecto, los atributos definidos dentro de una interfaz?",
+                        opciones: [
+                            "public, static y final (constantes)",
+                            "protected y abstractos",
+                            "transient y volatile",
+                            "private y variables"
+                        ],
+                        correcta: 0
+                    },
+                    {
+                        id: 17,
+                        texto: "¿Qué es un método 'default' en una interfaz?",
+                        opciones: [
+                            "Un método que se ejecuta si falla la aplicación",
+                            "Un método que es privado por defecto",
+                            "Un método con una implementación base que las clases no están obligadas a sobrescribir",
+                            "El constructor por defecto de la interfaz"
+                        ],
+                        correcta: 2
+                    },
+                    {
+                        id: 18,
+                        texto: "¿Cuál es la principal diferencia entre una clase abstracta y una interfaz?",
+                        opciones: [
+                            "Las interfaces se heredan con 'extends'",
+                            "Las clases abstractas pueden tener estado (atributos no constantes), las interfaces no",
+                            "Las interfaces no pueden tener métodos",
+                            "No hay diferencias reales desde Java 8"
+                        ],
+                        correcta: 1
+                    },
+                    {
+                        id: 19,
+                        texto: "¿Qué devuelve el método 'getClass()'?",
+                        opciones: [
+                            "La dirección de memoria del objeto",
+                            "Una cadena con el nombre del código fuente",
+                            "El valor de todos los atributos del objeto",
+                            "Un objeto de tipo Class que representa la clase en tiempo de ejecución"
+                        ],
+                        correcta: 3
+                    },
+                    {
+                        id: 20,
+                        texto: "¿Qué es una clase interna (Inner Class) miembro?",
+                        opciones: [
+                            "Una clase definida dentro de otra clase como un miembro más",
+                            "Una clase que hereda de una interfaz",
+                            "Una clase que solo tiene métodos privados",
+                            "Una clase definida fuera del paquete"
+                        ],
+                        correcta: 0
+                    },
+                    {
+                        id: 21,
+                        texto: "¿Cuál es la característica principal de una 'clase anónima' (inline)?",
+                        opciones: [
+                            "Solo puede existir en archivos de texto",
+                            "No tiene nombre y se define en el momento de la instanciación",
+                            "No puede tener métodos",
+                            "Es invisible para el compilador"
+                        ],
+                        correcta: 1
+                    },
+                    {
+                        id: 22,
+                        texto: "¿Qué permiten las 'clases selladas' (sealed classes) introducidas en versiones recientes?",
+                        opciones: [
+                            "Que la clase se borre tras ser usada",
+                            "Impedir que se lean los atributos de la clase",
+                            "Hacer que la clase sea inmune a virus",
+                            "Restringir qué clases pueden heredar de ellas mediante 'permits'"
+                        ],
+                        correcta: 3
+                    },
+                    {
+                        id: 23,
+                        texto: "Si una clase extiende una clase 'sealed', ¿qué debe ser obligatoriamente?",
+                        opciones: [
+                            "No necesita ningún modificador especial",
+                            "Debe declararse como 'final', 'sealed' o 'non-sealed'",
+                            "Solo puede ser 'final'",
+                            "Debe ser una interfaz"
+                        ],
+                        correcta: 1
+                    },
+                    {
+                        id: 24,
+                        texto: "¿Qué significa que una clase sea 'non-sealed'?",
+                        opciones: [
+                            "Que es igual que una clase abstracta",
+                            "Que es una clase privada",
+                            "Que vuelve a permitir la herencia libre para cualquier otra clase",
+                            "Que no puede tener métodos"
+                        ],
+                        correcta: 2
+                    },
+                    {
+                        id: 25,
+                        texto: "¿Pueden las interfaces ser selladas (sealed interfaces)?",
+                        opciones: [
+                            "Sí, pero solo si no tienen métodos default",
+                            "Solo si están dentro de un registro (record)",
+                            "No, solo las clases",
+                            "Sí, y limitan qué clases o interfaces pueden implementarlas o extenderlas"
+                        ],
+                        correcta: 3
+                    },
+                    {
+                        id: 26,
+                        texto: "En el contexto de la herencia, ¿qué es la 'especialización'?",
+                        opciones: [
+                            "El proceso de crear una subclase que añade atributos o métodos a una superclase",
+                            "Cuando un programador solo sabe Java",
+                            "Convertir un objeto en un tipo primitivo",
+                            "El proceso de crear una superclase a partir de subclases"
+                        ],
+                        correcta: 0
+                    },
+                    {
+                        id: 27,
+                        texto: "¿Qué sucede con los miembros 'private' de la superclase en la subclase?",
+                        opciones: [
+                            "Existen en el objeto, pero la subclase no puede acceder a ellos directamente",
+                            "Solo pueden usarse si se usa 'super.'",
+                            "Se vuelven públicos",
+                            "Se eliminan para ahorrar memoria"
+                        ],
+                        correcta: 0
+                    },
+                    {
+                        id: 28,
+                        texto: "Si una subclase tiene un atributo con el mismo nombre que uno de la superclase, ¿qué ocurre?",
+                        opciones: [
+                            "El del padre se borra",
+                            "El atributo de la subclase oculta (shadowing) al de la superclase",
+                            "Error de compilación",
+                            "Se fusionan en un solo atributo"
+                        ],
+                        correcta: 1
+                    },
+                    {
+                        id: 29,
+                        texto: "¿Cuál es la principal ventaja de usar polimorfismo?",
+                        opciones: [
+                            "Poder escribir código genérico que funcione con cualquier objeto de una jerarquía",
+                            "Que los objetos ocupen menos espacio en memoria",
+                            "Que el código se ejecute más rápido",
+                            "Evitar el uso de clases abstractas"
+                        ],
+                        correcta: 0
+                    },
+                    {
+                        id: 30,
+                        texto: "¿Se pueden definir métodos estáticos en una interfaz?",
+                        opciones: [
+                            "Sí, pero solo si la interfaz es sellada",
+                            "Sí, y se llaman a través del nombre de la interfaz",
+                            "Sí, y las clases que la implementan los heredan",
+                            "No, las interfaces solo tienen métodos abstractos"
+                        ],
+                        correcta: 1
+                    },
+                    {
+                        id: 31,
+                        texto: "¿Qué permite un método 'private' en una interfaz (Java 9+)?",
+                        opciones: [
+                            "Que las clases hijas no lo vean",
+                            "No están permitidos",
+                            "Ocultar constantes",
+                            "Evitar la duplicación de código entre métodos default de la propia interfaz"
+                        ],
+                        correcta: 3
+                    },
+                    {
+                        id: 32,
+                        texto: "¿Es posible crear una referencia de una clase abstracta?",
+                        opciones: [
+                            "Sí, para apuntar a objetos de sus subclases concretas",
+                            "Sí, pero solo dentro del mismo paquete",
+                            "Solo si la clase no tiene métodos abstractos",
+                            "No, nunca"
+                        ],
+                        correcta: 0
+                    },
+                    {
+                        id: 33,
+                        texto: "Cuando en herencia usamos un casting, ¿qué riesgo corremos si no usamos 'instanceof'?",
+                        opciones: [
+                            "Lanzar una excepción ClassCastException en ejecución",
+                            "Que el programa no compile",
+                            "Que se pierdan los datos del objeto",
+                            "Que el objeto se convierta en null"
+                        ],
+                        correcta: 0
+                    },
+                    {
+                        id: 34,
+                        texto: "Si tenemos una interfaz 'Volable' y una clase 'Pajaro' que la implementa, ¿es correcto: 'Volable v = new Pajaro();'?",
+                        opciones: [
+                            "Sí, pero solo podemos acceder a métodos de la clase Pajaro",
+                            "Solo si Pajaro es una clase abstracta",
+                            "Sí, gracias al polimorfismo",
+                            "No, porque una interfaz no es una clase"
+                        ],
+                        correcta: 2
+                    },
+                    {
+                        id: 35,
+                        texto: "¿Qué visibilidad tienen los métodos de una interfaz por defecto si no se especifica?",
+                        opciones: [
+                            "public",
+                            "package-private",
+                            "abstract",
+                            "protected"
+                        ],
+                        correcta: 0
+                    },
+                    {
+                        id: 36,
+                        texto: "¿Qué nombre recibe una clase definida dentro de un método?",
+                        opciones: [
+                            "Clase externa",
+                            "Clase global",
+                            "Clase local",
+                            "Clase estática"
+                        ],
+                        correcta: 2
+                    },
+                    {
+                        id: 37,
+                        texto: "¿Qué ocurre si una clase intenta heredar de una clase 'final'?",
+                        opciones: [
+                            "El compilador da un error",
+                            "Hereda solo los métodos",
+                            "La nueva clase se vuelve final automáticamente",
+                            "Se ignora el modificador final"
+                        ],
+                        correcta: 0
+                    },
+                    {
+                        id: 38,
+                        texto: "¿Es obligatorio implementar todos los métodos de una interfaz en una clase que la implementa?",
+                        opciones: [
+                            "Sí, siempre",
+                            "No, solo los métodos que quieras usar",
+                            "No, si la clase se declara como abstracta",
+                            "Sí, excepto los métodos estáticos del padre"
+                        ],
+                        correcta: 2
+                    },
+                    {
+                        id: 39,
+                        texto: "¿Qué método de la clase Object se recomienda anular siempre junto con 'equals()'?",
+                        opciones: [
+                            "hashCode()",
+                            "clone()",
+                            "getClass()",
+                            "toString()"
+                        ],
+                        correcta: 0
+                    },
+                    {
+                        id: 40,
+                        texto: "En la jerarquía de excepciones, ¿de qué clase heredan todas las excepciones comprobadas?",
+                        opciones: [
+                            "Exception",
+                            "RuntimeException",
+                            "Error",
+                            "Throwable"
+                        ],
+                        correcta: 0
+                    },
+                    {
+                        id: 41,
+                        texto: "¿Puede una interfaz heredar de una clase?",
+                        opciones: [
+                            "Solo si la clase es Object",
+                            "Sí, si la clase es abstracta",
+                            "Sí, usando 'implements'",
+                            "No, las interfaces solo pueden heredar de otras interfaces"
+                        ],
+                        correcta: 3
+                    },
+                    {
+                        id: 42,
+                        texto: "¿Qué sucede si una subclase no define un constructor?",
+                        opciones: [
+                            "La clase se vuelve abstracta",
+                            "No se pueden crear objetos de ella",
+                            "Hereda el constructor del padre",
+                            "Java crea un constructor por defecto que llama a super() sin parámetros"
+                        ],
+                        correcta: 3
+                    },
+                    {
+                        id: 43,
+                        texto: "Sobre la ocultación de métodos estáticos, ¿cuál es la diferencia con la anulación?",
+                        opciones: [
+                            "No hay diferencia",
+                            "La ejecución depende del tipo de la referencia, no del objeto real",
+                            "Es obligatorio usar @Override",
+                            "Los métodos estáticos no se pueden redefinir"
+                        ],
+                        correcta: 1
+                    },
+                    {
+                        id: 44,
+                        texto: "¿Qué palabra clave permite a una clase sellada autorizar a sus herederos?",
+                        opciones: [
+                            "allow",
+                            "permits",
+                            "authorized",
+                            "to"
+                        ],
+                        correcta: 1
+                    },
+                    {
+                        id: 45,
+                        texto: "¿Es posible que una clase interna acceda a las variables locales de un método?",
+                        opciones: [
+                            "No, bajo ninguna circunstancia",
+                            "Solo si las variables son estáticas",
+                            "Sí, pero solo si la clase interna es pública",
+                            "Sí, siempre que esas variables sean final o 'efectivamente final'"
+                        ],
+                        correcta: 3
+                    },
+                    {
+                        id: 46,
+                        texto: "Diferencia entre sobrecarga y anulación:",
+                        opciones: [
+                            "La sobrecarga solo sirve para constructores",
+                            "La anulación cambia el nombre del método",
+                            "Sobrecarga requiere @Override",
+                            "Sobrecarga es en la misma clase, anulación es en la jerarquía"
+                        ],
+                        correcta: 3
+                    },
+                    {
+                        id: 47,
+                        texto: "¿Qué sucede si una superclase solo tiene un constructor con parámetros y la subclase no define ninguno?",
+                        opciones: [
+                            "La clase se ignora",
+                            "El compilador inventa valores para el padre",
+                            "Funciona correctamente",
+                            "Error de compilación en la subclase"
+                        ],
+                        correcta: 3
+                    },
+                    {
+                        id: 48,
+                        texto: "¿Cuál es el objetivo final de la Herencia en programación?",
+                        opciones: [
+                            "Que los programas ocupen menos espacio en el disco duro",
+                            "Reutilizar código y crear jerarquías lógicas",
+                            "Hacer el código más difícil de leer",
+                            "Eliminar la necesidad de usar objetos"
+                        ],
+                        correcta: 1
+                    }
+                ]
+            }
+        }
+    },
+    tema8: {
+        id: 8,
+        titulo: "Tema 8 - Tipos Enumerados",
+        subtemas: {
+            "8.1": {
+                titulo: "Tema 8 - Tipos Enumerados",
+                preguntas: [
+                    {
+                        id: 1,
+                        texto: "¿Cuál es la principal ventaja de utilizar 'enum' en lugar del patrón de constantes enteras (int enum pattern)?",
+                        opciones: [
+                            "Hacen que el código sea compatible con versiones de Java anteriores a la 1.5.",
+                            "Permiten que las constantes cambien su valor durante la ejecución.",
+                            "Ocupan menos espacio en memoria RAM.",
+                            "Proporcionan seguridad de tipos en tiempo de compilación."
+                        ],
+                        correcta: 3
+                    },
+                    {
+                        id: 2,
+                        texto: "En Java, ¿de qué clase heredan implícitamente todos los tipos enumerados?",
+                        opciones: [
+                            "No heredan de ninguna clase, son tipos primitivos.",
+                            "java.lang.Enum",
+                            "java.lang.Object",
+                            "java.util.Enumeration"
+                        ],
+                        correcta: 1
+                    },
+                    {
+                        id: 3,
+                        texto: "¿Es posible que un 'enum' herede de otra clase utilizando la palabra 'extends'?",
+                        opciones: [
+                            "No, porque Java no permite la herencia múltiple y los enums ya heredan de java.lang.Enum.",
+                            "Solo si la clase padre no tiene constructores.",
+                            "Sí, pero solo si la clase padre es una clase interna.",
+                            "Sí, siempre que la clase padre sea abstracta."
+                        ],
+                        correcta: 0
+                    },
+                    {
+                        id: 4,
+                        texto: "¿Qué visibilidad debe tener el constructor de un tipo enumerado?",
+                        opciones: [
+                            "No pueden tener constructores.",
+                            "Public",
+                            "Private o de paquete (default)",
+                            "Protected"
+                        ],
+                        correcta: 2
+                    },
+                    {
+                        id: 5,
+                        texto: "¿Para qué sirve el método estático 'values()' que el compilador añade a los enums?",
+                        opciones: [
+                            "Para obtener un array con todas las constantes del enum en el orden en que fueron declaradas.",
+                            "Para convertir un String en una constante del enum.",
+                            "Para obtener el valor entero asociado a una constante.",
+                            "Para comparar dos valores del enum."
+                        ],
+                        correcta: 0
+                    },
+                    {
+                        id: 6,
+                        texto: "Si definimos un enum 'Color { ROJO, VERDE, AZUL }', ¿qué devolvería 'Color.VERDE.ordinal()'?",
+                        opciones: [
+                            "1",
+                            "\"VERDE\"",
+                            "Un valor aleatorio.",
+                            "2"
+                        ],
+                        correcta: 0
+                    },
+                    {
+                        id: 7,
+                        texto: "¿Cómo se asocian datos o atributos a las constantes de un enum?",
+                        opciones: [
+                            "Heredando de una clase que tenga esos atributos.",
+                            "Definiendo variables de instancia y un constructor que las inicialice.",
+                            "Usando un Map externo obligatoriamente.",
+                            "No se puede, los enums solo son nombres."
+                        ],
+                        correcta: 1
+                    },
+                    {
+                        id: 8,
+                        texto: "¿Puede un tipo enumerado implementar una interfaz?",
+                        opciones: [
+                            "Solo si el enum no tiene constructor.",
+                            "Sí, y cada constante puede incluso proporcionar una implementación diferente de los métodos de la interfaz.",
+                            "Solo si la interfaz no tiene métodos abstractos.",
+                            "No, porque los enums no son clases reales."
+                        ],
+                        correcta: 1
+                    },
+                    {
+                        id: 9,
+                        texto: "¿Qué es un 'cuerpo de clase constante' (constant-specific class body) en un enum?",
+                        opciones: [
+                            "Un método que solo puede ser llamado una vez.",
+                            "La capacidad de una constante de sobrescribir métodos definidos en el enum base.",
+                            "Un bloque de código que se ejecuta al cargar el enum.",
+                            "Es el nombre técnico del constructor del enum."
+                        ],
+                        correcta: 1
+                    },
+                    {
+                        id: 10,
+                        texto: "¿Qué ocurre si declaras un método abstracto dentro de un enum?",
+                        opciones: [
+                            "El enum no compila porque no puede ser abstracto.",
+                            "Solo la primera constante está obligada a implementarlo.",
+                            "Cada constante del enum debe implementar obligatoriamente dicho método.",
+                            "El método se ignora si no se implementa."
+                        ],
+                        correcta: 2
+                    },
+                    {
+                        id: 11,
+                        texto: "¿Cuál es la forma recomendada de comparar dos constantes de un enum?",
+                        opciones: [
+                            "Usando '.equals()'",
+                            "Comparando sus nombres con '.compareTo() == 0'",
+                            "Usando el operador '=='",
+                            "Comparando sus valores ordinales."
+                        ],
+                        correcta: 2
+                    },
+                    {
+                        id: 12,
+                        texto: "En el temario se menciona que los enums son 'tipos seguros'. ¿Qué significa esto?",
+                        opciones: [
+                            "Que solo pueden ser usados por un hilo a la vez.",
+                            "Que el compilador impide asignar un valor que no pertenezca a la lista de constantes definidas.",
+                            "Que los datos están encriptados.",
+                            "Que no pueden ser borrados de la memoria."
+                        ],
+                        correcta: 1
+                    },
+                    {
+                        id: 13,
+                        texto: "Sobre el método 'valueOf(String s)', ¿qué sucede si el String no coincide exactamente con ninguna constante?",
+                        opciones: [
+                            "Devuelve null.",
+                            "Devuelve la primera constante por defecto.",
+                            "Crea una nueva constante con ese nombre.",
+                            "Lanza una excepción de tipo IllegalArgumentException."
+                        ],
+                        correcta: 3
+                    },
+                    {
+                        id: 14,
+                        texto: "¿Por qué no se recomienda usar el método 'ordinal()' para la lógica de negocio persistente?",
+                        opciones: [
+                            "Porque es muy lento.",
+                            "Porque devuelve un número aleatorio.",
+                            "Porque si se cambia el orden de las constantes en el código, el valor ordinal cambia.",
+                            "Porque solo funciona con enums de menos de 10 elementos."
+                        ],
+                        correcta: 2
+                    },
+                    {
+                        id: 15,
+                        texto: "¿Pueden los enums tener métodos estáticos?",
+                        opciones: [
+                            "Sí, pero solo si son privados.",
+                            "No, solo métodos de instancia.",
+                            "Sí, y se pueden usar como métodos de utilidad relacionados con el tipo.",
+                            "Solo si el enum no implementa interfaces."
+                        ],
+                        correcta: 2
+                    },
+                    {
+                        id: 16,
+                        texto: "En el ejemplo de 'BasicOperation' del temario, ¿qué permite que cada operación aplique una lógica distinta?",
+                        opciones: [
+                            "No es posible, todas las constantes comparten el mismo código.",
+                            "El uso de la reflexión de Java.",
+                            "Un bloque switch gigante dentro del método apply.",
+                            "La definición de un método abstracto en el enum que cada constante implementa."
+                        ],
+                        correcta: 3
+                    },
+                    {
+                        id: 17,
+                        texto: "¿Qué ocurre si intentas usar 'new' para crear una instancia de un enum?",
+                        opciones: [
+                            "Funciona solo si el constructor es público.",
+                            "Se produce un error de compilación.",
+                            "El programa se detiene con un error de ejecución.",
+                            "Se crea un nuevo valor de la enumeración."
+                        ],
+                        correcta: 1
+                    },
+                    {
+                        id: 18,
+                        texto: "¿Cómo se suele llamar al patrón de diseño que un Enum implementa por defecto para cada una de sus constantes?",
+                        opciones: [
+                            "Adapter",
+                            "Singleton",
+                            "Factory",
+                            "Observer"
+                        ],
+                        correcta: 1
+                    },
+                    {
+                        id: 19,
+                        texto: "¿Cuál es la sintaxis correcta para declarar un enum sencillo?",
+                        opciones: [
+                            "public class Mes { ENERO, FEBRERO }",
+                            "enum Mes ( ENERO, FEBRERO )",
+                            "public enum Mes { ENERO, FEBRERO }",
+                            "define Mes as ENERO | FEBRERO"
+                        ],
+                        correcta: 2
+                    },
+                    {
+                        id: 20,
+                        texto: "Si un enum implementa una interfaz, ¿dónde se puede poner el código de los métodos de la interfaz?",
+                        opciones: [
+                            "Tanto a nivel de enum (común) como a nivel de constante (específico).",
+                            "En una clase externa obligatoriamente.",
+                            "Solo dentro de cada constante individualmente.",
+                            "Solo de forma general para todo el enum."
+                        ],
+                        correcta: 0
+                    }
+                ]
+            }
+        }
     }
-    // Aquí puedes agregar más temas en el futuro:
 };
 
 // Función para obtener todas las preguntas de un tema
@@ -1563,5 +2332,15 @@ function obtenerTodasLasPreguntas(temaId) {
         todasLasPreguntas = todasLasPreguntas.concat(subtema.preguntas);
     });
     
+    return todasLasPreguntas;
+}
+
+// Función para obtener todas las preguntas de todos los temas
+function obtenerTodasLasPreguntasGlobales() {
+    let todasLasPreguntas = [];
+    Object.keys(temasData).forEach(temaKey => {
+        const preguntasTema = obtenerTodasLasPreguntas(temaKey);
+        todasLasPreguntas = todasLasPreguntas.concat(preguntasTema);
+    });
     return todasLasPreguntas;
 }

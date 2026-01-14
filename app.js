@@ -207,6 +207,12 @@ function cargarTemas() {
         
         temasList.appendChild(temaCard);
     });
+    
+    // Configurar el test global
+    const testGlobalCard = document.getElementById('test-global-card');
+    if (testGlobalCard) {
+        testGlobalCard.onclick = iniciarTestGlobal;
+    }
 }
 
 // Mostrar índice de temas
@@ -220,6 +226,12 @@ function mostrarIndice() {
 function mostrarOpcionesTema(temaKey = null) {
     if (temaKey) {
         estadoApp.temaActual = temaKey;
+    }
+    
+    // Si no hay tema actual o es global, volver al índice
+    if (!estadoApp.temaActual || estadoApp.temaActual === 'global') {
+        mostrarIndice();
+        return;
     }
     
     ocultarTodasLasVistas();
@@ -285,6 +297,29 @@ function iniciarTestAleatorio() {
     estadoApp.preguntasTest = mezclarArray([...todasLasPreguntas]);
     estadoApp.preguntaActualIndex = 0;
     estadoApp.testActivo = true;
+    estadoApp.estadisticas.correctas = 0;
+    estadoApp.estadisticas.incorrectas = 0;
+    
+    ocultarTodasLasVistas();
+    document.getElementById('test-view').classList.add('active');
+    
+    mostrarPreguntaTest();
+}
+
+// Iniciar test global con todas las preguntas de todos los temas
+function iniciarTestGlobal() {
+    const todasLasPreguntas = obtenerTodasLasPreguntasGlobales();
+    
+    if (todasLasPreguntas.length === 0) {
+        alert('No hay preguntas disponibles.');
+        return;
+    }
+    
+    // Mezclar preguntas aleatoriamente
+    estadoApp.preguntasTest = mezclarArray([...todasLasPreguntas]);
+    estadoApp.preguntaActualIndex = 0;
+    estadoApp.testActivo = true;
+    estadoApp.temaActual = 'global'; // Marcar como test global
     estadoApp.estadisticas.correctas = 0;
     estadoApp.estadisticas.incorrectas = 0;
     
@@ -399,8 +434,18 @@ function finalizarTest() {
     document.getElementById('opciones-test').innerHTML = '';
     document.getElementById('resultado-test').classList.add('hidden');
     document.getElementById('siguiente-btn').textContent = 'Volver al Menú';
-    document.getElementById('siguiente-btn').onclick = mostrarOpcionesTema;
+    // Si es test global, volver al índice, si no, volver a opciones del tema
+    document.getElementById('siguiente-btn').onclick = estadoApp.temaActual === 'global' ? mostrarIndice : mostrarOpcionesTema;
     document.getElementById('siguiente-btn').classList.remove('hidden');
+}
+
+// Terminar test desde el botón
+function terminarTestDesdeBoton() {
+    if (estadoApp.temaActual === 'global') {
+        mostrarIndice();
+    } else {
+        mostrarOpcionesTema();
+    }
 }
 
 // Utilidades
