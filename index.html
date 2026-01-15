@@ -30,6 +30,9 @@
         <div id="tema-view" class="view">
             <button class="back-button" onclick="mostrarIndice()">← Volver al índice</button>
             <h2 id="tema-titulo"></h2>
+            <div id="temario-links" class="temario-links">
+                <!-- Los enlaces al temario se cargarán dinámicamente -->
+            </div>
             <div class="opciones-tema">
                 <button class="opcion-btn" onclick="mostrarLectura()">
                     <span class="icon">📖</span>
@@ -49,6 +52,9 @@
             <div id="preguntas-container" class="preguntas-lista">
                 <!-- Las preguntas se cargarán dinámicamente -->
             </div>
+            <button id="scroll-top-btn" class="scroll-top-btn" onclick="scrollToTop()" title="Volver arriba">
+                ↑
+            </button>
         </div>
 
         <!-- Vista de test aleatorio -->
@@ -65,6 +71,15 @@
             </div>
             
             <div class="test-content">
+                <div class="test-navigation-controls">
+                    <div class="nav-buttons">
+                        <button id="anterior-btn" class="nav-btn" onclick="preguntaAnterior()" disabled>← Anterior</button>
+                        <select id="pregunta-selector" class="pregunta-selector" onchange="irAPregunta(this.value)">
+                            <!-- Se llenará dinámicamente -->
+                        </select>
+                        <button id="siguiente-nav-btn" class="nav-btn" onclick="siguientePregunta()">Siguiente →</button>
+                    </div>
+                </div>
                 <div id="pregunta-test" class="pregunta-test">
                     <!-- La pregunta del test se cargará aquí -->
                 </div>

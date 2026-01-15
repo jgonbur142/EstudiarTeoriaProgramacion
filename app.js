@@ -6,6 +6,7 @@ let estadoApp = {
     preguntasTest: [],
     preguntaActualIndex: 0,
     respuestaSeleccionada: null,
+    respuestasUsuario: {}, // Guarda las respuestas del usuario: { índicePregunta: { seleccionada: índice, correcta: boolean } }
     estadisticas: {
         correctas: 0,
         incorrectas: 0
@@ -184,9 +185,36 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
+// Función para scroll hacia arriba
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Mostrar/ocultar botón de scroll según la posición y la vista activa
+function toggleScrollButton() {
+    const scrollBtn = document.getElementById('scroll-top-btn');
+    if (!scrollBtn) return;
+    
+    // Solo mostrar en la vista de lectura
+    const lecturaView = document.getElementById('lectura-view');
+    const isLecturaActive = lecturaView && lecturaView.classList.contains('active');
+    
+    if (isLecturaActive && window.scrollY > 300) {
+        scrollBtn.classList.add('visible');
+    } else {
+        scrollBtn.classList.remove('visible');
+    }
+}
+
 // Inicialización
 document.addEventListener('DOMContentLoaded', function() {
     cargarTemas();
+    
+    // Listener para el botón de scroll
+    window.addEventListener('scroll', toggleScrollButton);
+    
+    // Inicializar estado del botón
+    toggleScrollButton();
 });
 
 // Cargar temas en el índice
@@ -200,9 +228,13 @@ function cargarTemas() {
         temaCard.className = 'tema-card';
         temaCard.onclick = () => mostrarOpcionesTema(temaKey);
         
+        // Extraer el título sin el número del tema
+        const tituloSinNumero = tema.titulo.replace(/^Tema \d+\s*-\s*/, '');
+        
         temaCard.innerHTML = `
             <h3>Tema ${tema.id}</h3>
-            <p>Haz clic para ver las opciones</p>
+            <p style="font-weight: bold; margin-top: 5px;">${tituloSinNumero}</p>
+            <p style="font-size: 0.85rem; opacity: 0.9; margin-top: 5px;">Haz clic para ver las opciones</p>
         `;
         
         temasList.appendChild(temaCard);
@@ -222,6 +254,62 @@ function mostrarIndice() {
     resetearEstado();
 }
 
+// Generar enlaces al temario
+function generarEnlacesTemario(temaKey) {
+    const temarioLinksContainer = document.getElementById('temario-links');
+    temarioLinksContainer.innerHTML = '';
+    
+    const tema = temasData[temaKey];
+    if (!tema) return;
+    
+    // Caso especial: Tema 4 tiene 3 subtemas con PDFs separados
+    if (tema.id === 4) {
+        const subtemas = [
+            { num: '4.1', nombre: 'Arrays unidimensionales', archivo: '4.1 Arrays unidimensionales.pdf' },
+            { num: '4.2', nombre: 'Arrays multidimensionales', archivo: '4.2 Arrays multidimensionales.pdf' },
+            { num: '4.3', nombre: 'La clase Arrays', archivo: '4.3 La clase Arrays.pdf' }
+        ];
+        
+        const temarioSection = document.createElement('div');
+        temarioSection.className = 'temario-section';
+        temarioSection.innerHTML = '<h3 style="color: #667eea; margin-bottom: 15px; font-size: 1.2rem;">📄 Temario</h3>';
+        
+        subtemas.forEach(subtema => {
+            const link = document.createElement('a');
+            link.href = `temario/${subtema.archivo}`;
+            link.target = '_blank';
+            link.className = 'temario-link';
+            link.innerHTML = `<span class="temario-icon">📄</span> <span>${subtema.num} - ${subtema.nombre}</span>`;
+            temarioSection.appendChild(link);
+        });
+        
+        temarioLinksContainer.appendChild(temarioSection);
+    } else {
+        // Para los demás temas, un solo PDF
+        const archivosTemario = {
+            5: '5 Programación Orientada a Objetos.pdf',
+            6: '6 Excepciones.pdf',
+            7: '7 Herencia.pdf',
+            8: '8 Tipos enumerados.pdf'
+        };
+        
+        const archivo = archivosTemario[tema.id];
+        if (archivo) {
+            const temarioSection = document.createElement('div');
+            temarioSection.className = 'temario-section';
+            
+            const link = document.createElement('a');
+            link.href = `temario/${archivo}`;
+            link.target = '_blank';
+            link.className = 'temario-link';
+            link.innerHTML = `<span class="temario-icon">📄</span> <span>Temario - Tema ${tema.id}</span>`;
+            
+            temarioSection.appendChild(link);
+            temarioLinksContainer.appendChild(temarioSection);
+        }
+    }
+}
+
 // Mostrar opciones del tema
 function mostrarOpcionesTema(temaKey = null) {
     if (temaKey) {
@@ -238,6 +326,9 @@ function mostrarOpcionesTema(temaKey = null) {
     document.getElementById('tema-view').classList.add('active');
     document.getElementById('tema-titulo').textContent = 
         `Tema ${temasData[estadoApp.temaActual].id}`;
+    
+    // Generar enlaces al temario
+    generarEnlacesTemario(estadoApp.temaActual);
 }
 
 // Mostrar lectura de preguntas
@@ -282,6 +373,9 @@ function mostrarLectura() {
         
         container.appendChild(subtemaSection);
     });
+    
+    // Scroll al inicio
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Iniciar test aleatorio
@@ -297,12 +391,18 @@ function iniciarTestAleatorio() {
     estadoApp.preguntasTest = mezclarArray([...todasLasPreguntas]);
     estadoApp.preguntaActualIndex = 0;
     estadoApp.testActivo = true;
+    estadoApp.respuestasUsuario = {}; // Resetear respuestas
     estadoApp.estadisticas.correctas = 0;
     estadoApp.estadisticas.incorrectas = 0;
     
     ocultarTodasLasVistas();
     document.getElementById('test-view').classList.add('active');
     
+    // Mostrar controles de navegación
+    const navControls = document.querySelector('.test-navigation-controls');
+    if (navControls) navControls.style.display = 'block';
+    
+    crearSelectorPreguntas();
     mostrarPreguntaTest();
 }
 
@@ -320,13 +420,66 @@ function iniciarTestGlobal() {
     estadoApp.preguntaActualIndex = 0;
     estadoApp.testActivo = true;
     estadoApp.temaActual = 'global'; // Marcar como test global
+    estadoApp.respuestasUsuario = {}; // Resetear respuestas
     estadoApp.estadisticas.correctas = 0;
     estadoApp.estadisticas.incorrectas = 0;
     
     ocultarTodasLasVistas();
     document.getElementById('test-view').classList.add('active');
     
+    // Mostrar controles de navegación
+    const navControls = document.querySelector('.test-navigation-controls');
+    if (navControls) navControls.style.display = 'block';
+    
+    crearSelectorPreguntas();
     mostrarPreguntaTest();
+}
+
+// Crear selector de preguntas
+function crearSelectorPreguntas() {
+    const selector = document.getElementById('pregunta-selector');
+    selector.innerHTML = '';
+    
+    estadoApp.preguntasTest.forEach((pregunta, index) => {
+        const option = document.createElement('option');
+        option.value = index;
+        option.textContent = `Pregunta ${index + 1}`;
+        
+        // Verificar si está contestada
+        if (estadoApp.respuestasUsuario[index]) {
+            if (estadoApp.respuestasUsuario[index].correcta) {
+                option.className = 'contestada-correcta';
+                option.textContent += ' ✓';
+            } else {
+                option.className = 'contestada-incorrecta';
+                option.textContent += ' ✗';
+            }
+        } else {
+            option.className = 'sin-contestar';
+        }
+        
+        selector.appendChild(option);
+    });
+}
+
+// Actualizar selector de preguntas
+function actualizarSelectorPreguntas() {
+    const selector = document.getElementById('pregunta-selector');
+    if (!selector) return;
+    
+    selector.value = estadoApp.preguntaActualIndex;
+    
+    // Actualizar el estado visual de todas las opciones
+    Array.from(selector.options).forEach((option, index) => {
+        if (estadoApp.respuestasUsuario[index]) {
+            const respuesta = estadoApp.respuestasUsuario[index];
+            option.className = respuesta.correcta ? 'contestada-correcta' : 'contestada-incorrecta';
+            option.textContent = `Pregunta ${index + 1}` + (respuesta.correcta ? ' ✓' : ' ✗');
+        } else {
+            option.className = 'sin-contestar';
+            option.textContent = `Pregunta ${index + 1}`;
+        }
+    });
 }
 
 // Mostrar pregunta actual del test
@@ -337,17 +490,30 @@ function mostrarPreguntaTest() {
     }
     
     const pregunta = estadoApp.preguntasTest[estadoApp.preguntaActualIndex];
-    estadoApp.respuestaSeleccionada = null;
+    const respuestaGuardada = estadoApp.respuestasUsuario[estadoApp.preguntaActualIndex];
     
     // Actualizar estadísticas
     document.getElementById('pregunta-actual').textContent = 
         estadoApp.preguntaActualIndex + 1;
     document.getElementById('total-preguntas').textContent = 
         estadoApp.preguntasTest.length;
-    document.getElementById('correctas-count').textContent = 
-        estadoApp.estadisticas.correctas;
-    document.getElementById('incorrectas-count').textContent = 
-        estadoApp.estadisticas.incorrectas;
+    
+    // Recalcular estadísticas
+    let correctas = 0;
+    let incorrectas = 0;
+    Object.values(estadoApp.respuestasUsuario).forEach(resp => {
+        if (resp.correcta) correctas++;
+        else incorrectas++;
+    });
+    document.getElementById('correctas-count').textContent = correctas;
+    document.getElementById('incorrectas-count').textContent = incorrectas;
+    
+    // Actualizar selector
+    actualizarSelectorPreguntas();
+    
+    // Actualizar botones de navegación
+    document.getElementById('anterior-btn').disabled = estadoApp.preguntaActualIndex === 0;
+    document.getElementById('siguiente-nav-btn').disabled = estadoApp.preguntaActualIndex === estadoApp.preguntasTest.length - 1;
     
     // Mostrar pregunta sin formato
     document.getElementById('pregunta-test').innerHTML = escapeHtml(pregunta.texto).replace(/\n/g, '<br>');
@@ -360,20 +526,52 @@ function mostrarPreguntaTest() {
         const opcionBtn = document.createElement('button');
         opcionBtn.className = 'opcion-test';
         opcionBtn.textContent = `${String.fromCharCode(65 + index)}. ${opcion}`;
-        opcionBtn.onclick = () => seleccionarOpcion(index, pregunta.correcta);
+        
+        // Si ya hay una respuesta guardada, mostrar el estado
+        if (respuestaGuardada) {
+            opcionBtn.disabled = true;
+            if (index === pregunta.correcta) {
+                opcionBtn.classList.add('correcta');
+            } else if (index === respuestaGuardada.seleccionada) {
+                opcionBtn.classList.add('incorrecta');
+            }
+            opcionBtn.onclick = null;
+        } else {
+            opcionBtn.onclick = () => seleccionarOpcion(index, pregunta.correcta);
+        }
+        
         opcionesContainer.appendChild(opcionBtn);
     });
     
-    // Ocultar resultado y botón siguiente
-    document.getElementById('resultado-test').classList.add('hidden');
-    document.getElementById('siguiente-btn').classList.add('hidden');
+    // Mostrar resultado si ya está contestada
+    const resultadoDiv = document.getElementById('resultado-test');
+    if (respuestaGuardada) {
+        resultadoDiv.classList.remove('hidden');
+        if (respuestaGuardada.correcta) {
+            resultadoDiv.className = 'resultado-test correcto';
+            resultadoDiv.textContent = '✓ ¡Correcto!';
+        } else {
+            resultadoDiv.className = 'resultado-test incorrecto';
+            const textoOpcion = pregunta.opciones[pregunta.correcta];
+            resultadoDiv.textContent = `✗ Incorrecto. La respuesta correcta es: ${String.fromCharCode(65 + pregunta.correcta)}. ${textoOpcion}`;
+        }
+        document.getElementById('siguiente-btn').classList.add('hidden');
+    } else {
+        resultadoDiv.classList.add('hidden');
+        document.getElementById('siguiente-btn').classList.add('hidden');
+    }
 }
 
 // Seleccionar opción en el test
 function seleccionarOpcion(indiceSeleccionado, indiceCorrecto) {
-    if (estadoApp.respuestaSeleccionada !== null) return; // Ya se seleccionó
+    const preguntaIndex = estadoApp.preguntaActualIndex;
     
-    estadoApp.respuestaSeleccionada = indiceSeleccionado;
+    // Guardar la respuesta
+    const esCorrecta = indiceSeleccionado === indiceCorrecto;
+    estadoApp.respuestasUsuario[preguntaIndex] = {
+        seleccionada: indiceSeleccionado,
+        correcta: esCorrecta
+    };
     
     const opciones = document.querySelectorAll('.opcion-test');
     
@@ -392,16 +590,28 @@ function seleccionarOpcion(indiceSeleccionado, indiceCorrecto) {
     const resultadoDiv = document.getElementById('resultado-test');
     resultadoDiv.classList.remove('hidden');
     
-    if (indiceSeleccionado === indiceCorrecto) {
+    const pregunta = estadoApp.preguntasTest[preguntaIndex];
+    if (esCorrecta) {
         resultadoDiv.className = 'resultado-test correcto';
         resultadoDiv.textContent = '✓ ¡Correcto!';
-        estadoApp.estadisticas.correctas++;
     } else {
         resultadoDiv.className = 'resultado-test incorrecto';
-        const textoOpcion = opciones[indiceCorrecto].textContent.replace(/^[A-Z]\.\s*/, '');
+        const textoOpcion = pregunta.opciones[indiceCorrecto];
         resultadoDiv.textContent = `✗ Incorrecto. La respuesta correcta es: ${String.fromCharCode(65 + indiceCorrecto)}. ${textoOpcion}`;
-        estadoApp.estadisticas.incorrectas++;
     }
+    
+    // Actualizar selector
+    actualizarSelectorPreguntas();
+    
+    // Actualizar estadísticas
+    let correctas = 0;
+    let incorrectas = 0;
+    Object.values(estadoApp.respuestasUsuario).forEach(resp => {
+        if (resp.correcta) correctas++;
+        else incorrectas++;
+    });
+    document.getElementById('correctas-count').textContent = correctas;
+    document.getElementById('incorrectas-count').textContent = incorrectas;
     
     // Mostrar botón siguiente
     document.getElementById('siguiente-btn').classList.remove('hidden');
@@ -409,22 +619,55 @@ function seleccionarOpcion(indiceSeleccionado, indiceCorrecto) {
 
 // Siguiente pregunta del test
 function siguientePregunta() {
-    estadoApp.preguntaActualIndex++;
-    mostrarPreguntaTest();
+    if (estadoApp.preguntaActualIndex < estadoApp.preguntasTest.length - 1) {
+        estadoApp.preguntaActualIndex++;
+        mostrarPreguntaTest();
+        // Scroll suave hacia arriba
+        document.getElementById('test-view').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
+// Pregunta anterior del test
+function preguntaAnterior() {
+    if (estadoApp.preguntaActualIndex > 0) {
+        estadoApp.preguntaActualIndex--;
+        mostrarPreguntaTest();
+        // Scroll suave hacia arriba
+        document.getElementById('test-view').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
+// Ir a una pregunta específica
+function irAPregunta(indice) {
+    const index = parseInt(indice);
+    if (index >= 0 && index < estadoApp.preguntasTest.length) {
+        estadoApp.preguntaActualIndex = index;
+        mostrarPreguntaTest();
+        // Scroll suave hacia arriba
+        document.getElementById('test-view').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 }
 
 // Finalizar test
 function finalizarTest() {
     const totalPreguntas = estadoApp.preguntasTest.length;
-    const correctas = estadoApp.estadisticas.correctas;
-    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+    
+    // Calcular estadísticas desde respuestasUsuario
+    let correctas = 0;
+    let incorrectas = 0;
+    Object.values(estadoApp.respuestasUsuario).forEach(resp => {
+        if (resp.correcta) correctas++;
+        else incorrectas++;
+    });
+    
+    const porcentaje = totalPreguntas > 0 ? Math.round((correctas / totalPreguntas) * 100) : 0;
     
     document.getElementById('pregunta-test').innerHTML = `
         <h2 style="text-align: center; margin-bottom: 20px;">¡Test Finalizado!</h2>
         <div style="text-align: center; font-size: 1.1rem;">
             <p style="margin: 10px 0;">Total de preguntas: ${totalPreguntas}</p>
             <p style="margin: 10px 0; color: #28a745;">Correctas: ${correctas}</p>
-            <p style="margin: 10px 0; color: #dc3545;">Incorrectas: ${estadoApp.estadisticas.incorrectas}</p>
+            <p style="margin: 10px 0; color: #dc3545;">Incorrectas: ${incorrectas}</p>
             <p style="margin: 20px 0; font-size: 1.3rem; font-weight: bold; color: #667eea;">
                 Porcentaje de aciertos: ${porcentaje}%
             </p>
@@ -437,6 +680,9 @@ function finalizarTest() {
     // Si es test global, volver al índice, si no, volver a opciones del tema
     document.getElementById('siguiente-btn').onclick = estadoApp.temaActual === 'global' ? mostrarIndice : mostrarOpcionesTema;
     document.getElementById('siguiente-btn').classList.remove('hidden');
+    
+    // Ocultar controles de navegación
+    document.querySelector('.test-navigation-controls').style.display = 'none';
 }
 
 // Terminar test desde el botón
@@ -453,6 +699,9 @@ function ocultarTodasLasVistas() {
     document.querySelectorAll('.view').forEach(view => {
         view.classList.remove('active');
     });
+    // Ocultar botón de scroll al cambiar de vista
+    const scrollBtn = document.getElementById('scroll-top-btn');
+    if (scrollBtn) scrollBtn.classList.remove('visible');
 }
 
 function resetearEstado() {
@@ -462,6 +711,7 @@ function resetearEstado() {
     estadoApp.preguntasTest = [];
     estadoApp.preguntaActualIndex = 0;
     estadoApp.respuestaSeleccionada = null;
+    estadoApp.respuestasUsuario = {};
     estadoApp.estadisticas = { correctas: 0, incorrectas: 0 };
 }
 
