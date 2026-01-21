@@ -2319,6 +2319,192 @@ const temasData = {
                 ]
             }
         }
+    },
+    testResumen: {
+        id: 'resumen',
+        titulo: "Test Resumen - Conceptos Clave",
+        subtemas: {
+            "resumen": {
+                titulo: "Resumen de Conceptos",
+                preguntas: [
+                    {
+                        id: 1,
+                        texto: "¿Cuál es el índice de la primera posición en cualquier array de Java?",
+                        opciones: ["1", "0", "-1", "Depende de la longitud del array."],
+                        correcta: 1,
+                        aclaracion: "En Java, la posición de un dato concreto se denomina índice y, por definición técnica, este empieza siempre en 0 para referenciar el primer valor del conjunto."
+                    },
+                    {
+                        id: 2,
+                        texto: "Si tenemos un array declarado como int[] a = new int[3], ¿cuáles son los índices válidos?",
+                        opciones: ["1, 2 y 3", "0, 1, 2 y 3", "0, 1 y 2", "Solo el 3"],
+                        correcta: 2,
+                        aclaracion: "Al programar con las longitudes hay que tener cuidado: si un array es de tamaño 3, sus posiciones se recorren del 0 al 2. El índice 3 lanzaría una excepción."
+                    },
+                    {
+                        id: 3,
+                        texto: "¿Qué método de Java valida que un objeto no sea null y lanza una excepción si lo es?",
+                        opciones: ["checkNotNull", "validateObject", "requireNonNull", "isNotNull"],
+                        correcta: 2,
+                        aclaracion: "requireNonNull es una utilidad de Java que valida la existencia del objeto; si no es nulo, permite seguir usándolo y aplicarle métodos, de lo contrario interrumpe el flujo."
+                    },
+                    {
+                        id: 4,
+                        texto: "¿Cuál es la función principal de los records?",
+                        opciones: ["Sustituir a todas las clases normales.", "Almacenar valores inmutables como contenedores de datos.", "Permitir la herencia múltiple de clases.", "Crear objetos cuyos atributos cambien constantemente."],
+                        correcta: 1,
+                        aclaracion: "Los records son clases especiales diseñadas específicamente para ser contenedores de datos inmutables, facilitando la creación de objetos de transporte de información."
+                    },
+                    {
+                        id: 5,
+                        texto: "¿Qué nombre reciben los métodos de acceso (getters) generados por un record?",
+                        opciones: ["getNombre()", "nombre() (usando el nombre del atributo)", "getValueNombre()", "No se generan automáticamente."],
+                        correcta: 1,
+                        aclaracion: "Los records no cumplen el estándar JavaBean; en lugar de usar el prefijo 'get', los métodos se llaman directamente como el atributo (por ejemplo, x() o y())."
+                    },
+                    {
+                        id: 6,
+                        texto: "¿Cuál es una restricción de herencia para los records?",
+                        opciones: ["Solo pueden heredar de clases abstractas.", "Pueden heredar de otros records.", "No pueden heredar de una clase o record.", "No pueden implementar interfaces."],
+                        correcta: 2,
+                        aclaracion: "Por diseño, los records no pueden extender ninguna otra clase ni otro record, aunque sí tienen permitido implementar interfaces."
+                    },
+                    {
+                        id: 7,
+                        texto: "Según el temario, ¿qué es un 'Error' para Java?",
+                        opciones: ["Una condición controlable.", "Una condición incontrolable.", "Una excepción de tipo Checked.", "Un fallo que siempre debe capturarse con try-catch."],
+                        correcta: 1,
+                        aclaracion: "Java distingue entre Exception (condición controlable) y Error (condición incontrolable que la aplicación no debería intentar tratar)."
+                    },
+                    {
+                        id: 8,
+                        texto: "¿En qué orden se buscan los bloques 'catch' en un try-catch?",
+                        opciones: ["De forma aleatoria según la JVM.", "En cascada.", "De la superclase a la subclase obligatoriamente.", "Solo se ejecuta el catch que esté al final."],
+                        correcta: 1,
+                        aclaracion: "El orden es en cascada, por ello es fundamental colocar primero las subclases de excepción y después las superclases para que la captura sea efectiva."
+                    },
+                    {
+                        id: 9,
+                        texto: "¿Qué método devuelve el mismo mensaje que mandaría la JVM si no se controlase la excepción?",
+                        opciones: ["getMessage()", "toString()", "printStackTrace()", "getName()"],
+                        correcta: 2,
+                        aclaracion: "Mientras que getMessage() solo da la descripción, printStackTrace() muestra toda la traza del error, igual que el comportamiento por defecto de la máquina virtual."
+                    },
+                    {
+                        id: 10,
+                        texto: "¿Cuál es la característica principal de las excepciones de tipo 'Checked'?",
+                        opciones: ["No deben ser declaradas ni capturadas.", "Solo ocurren por errores de programación.", "Son errores recuperables que deben ser capturados o relanzados.", "Nunca pueden finalizar la ejecución del programa."],
+                        correcta: 2,
+                        aclaracion: "Las Checked Exceptions obligan al programador a gestionarlas (capturar o relanzar); de no hacerlo, el código no compilará o el programa finalizará."
+                    },
+                    {
+                        id: 11,
+                        texto: "¿Para qué se utiliza la palabra clave 'throws' en la firma de una función?",
+                        opciones: ["Para lanzar una nueva excepción con un mensaje.", "Para declarar la intención de relanzar una excepción.", "Para capturar el error sin usar un bloque catch.", "Para evitar que el programa falle."],
+                        correcta: 1,
+                        aclaracion: "throws avisa a quien llame a la función de que esa excepción puede ocurrir, obligando al llamante a capturarla o volverla a relanzar si es de tipo checked."
+                    },
+                    {
+                        id: 12,
+                        texto: "¿Cuál es la función del bloque 'finally'?",
+                        opciones: ["Ejecutar código solo si hay un error.", "Detener la ejecución del programa inmediatamente.", "Ejecutar código de limpieza, entre o no en el catch.", "Sustituir al bloque try en casos sencillos."],
+                        correcta: 2,
+                        aclaracion: "El bloque finally se coloca después del catch y garantiza que las instrucciones de limpieza se ejecuten siempre, independientemente del resultado del try."
+                    },
+                    {
+                        id: 13,
+                        texto: "¿Qué palabra clave se usa para que una clase herede de otra?",
+                        opciones: ["implements", "super", "extends", "final"],
+                        correcta: 2,
+                        aclaracion: "La herencia se define usando extends seguido del nombre de la superclase, permitiendo la reutilización de código y la creación de un árbol de herencia."
+                    },
+                    {
+                        id: 14,
+                        texto: "¿En qué se diferencia 'protected' de 'friendly' respecto a la herencia?",
+                        opciones: ["Protected es más restrictivo que friendly.", "Los elementos protected pueden ser heredados por subclases de distintos paquetes.", "Friendly permite heredar en cualquier paquete, protected no.", "No existe diferencia real, funcionan igual."],
+                        correcta: 1,
+                        aclaracion: "Aunque ambos son similares en visibilidad de paquete, protected otorga el permiso adicional de que hijos en paquetes diferentes puedan acceder a esos miembros."
+                    },
+                    {
+                        id: 15,
+                        texto: "Sobre los constructores y la herencia:",
+                        opciones: ["Los constructores se heredan automáticamente.", "Los constructores no se heredan, pero se pueden invocar.", "Solo se pueden usar constructores sin parámetros.", "Es obligatorio usar setters en lugar de constructores."],
+                        correcta: 1,
+                        aclaracion: "Aunque no se heredan, se pueden invocar mediante super(). Si la superclase tiene constructores con parámetros, la subclase debe llamarlos explícitamente."
+                    },
+                    {
+                        id: 16,
+                        texto: "¿Qué método de la clase Object se suele anular para devolver la representación en cadena de un objeto?",
+                        opciones: ["getName()", "hashcode()", "toString()", "getClass()"],
+                        correcta: 2,
+                        aclaracion: "toString() es heredado de Object y se anula para dar una representación legible. Java lo llama por defecto al poner un objeto en un print."
+                    },
+                    {
+                        id: 17,
+                        texto: "¿Qué permite el operador 'instanceof'?",
+                        opciones: ["Crear una instancia de una clase abstracta.", "Comprobar si un objeto pertenece a una clase concreta o superclase.", "Convertir un objeto de padre a hijo sin riesgos.", "Saber si un método es estático."],
+                        correcta: 1,
+                        aclaracion: "Sirve para validar el tipo de un objeto en tiempo de ejecución, permitiendo verificar si pertenece a una clase o a su jerarquía de padres."
+                    },
+                    {
+                        id: 18,
+                        texto: "Si un método se declara como 'final', ¿qué sucede?",
+                        opciones: ["El método no puede ser ejecutado.", "El método debe ser implementado por la subclase.", "Se impide que el método sea anulado por las subclases.", "El método se vuelve privado automáticamente."],
+                        correcta: 2,
+                        aclaracion: "final actúa como una restricción de seguridad que impide que las subclases modifiquen o sobrescriban la lógica de ese método específico."
+                    },
+                    {
+                        id: 19,
+                        texto: "¿Por qué la anulación de métodos es polimorfismo dinámico?",
+                        opciones: ["Porque el código cambia durante la compilación.", "Porque se resuelve en tiempo de ejecución.", "Porque solo ocurre en clases anidadas.", "Porque requiere el uso de records."],
+                        correcta: 1,
+                        aclaracion: "Se llama dinámico porque la decisión de qué versión del método ejecutar se toma mientras el programa corre, basándose en la instancia real del objeto."
+                    },
+                    {
+                        id: 20,
+                        texto: "¿Qué caracteriza a las clases abstractas?",
+                        opciones: ["Siempre deben tener todos sus métodos implementados.", "Pueden ser instanciadas directamente.", "Contienen al menos un método sin implementar (o se definen así para no ser instanciadas).", "No pueden tener atributos."],
+                        correcta: 2,
+                        aclaracion: "Una clase abstracta no permite crear objetos de su propio tipo; su fin es servir de base para que otras subclases implementen los métodos pendientes."
+                    },
+                    {
+                        id: 21,
+                        texto: "En una interfaz, ¿cómo son los métodos por defecto?",
+                        opciones: ["Siempre privados y finales.", "Abstractos y públicos (no hace falta indicarlo).", "Únicamente estáticos.", "Solo pueden existir dentro de un record."],
+                        correcta: 1,
+                        aclaracion: "Java asume automáticamente que los métodos son public y abstract, y que las constantes son static y final, simplificando la escritura del código."
+                    },
+                    {
+                        id: 22,
+                        texto: "¿Para qué sirve la palabra clave 'default' en una interfaz?",
+                        opciones: ["Para crear un constructor por defecto.", "Para que el método sea privado.", "Para definir métodos con implementación dentro de la interfaz.", "Para que el método no pueda ser anulado."],
+                        correcta: 2,
+                        aclaracion: "Los métodos default permiten que las interfaces tengan lógica propia, la cual puede ser heredada tal cual o anulada por las clases que implementen dicha interfaz."
+                    },
+                    {
+                        id: 23,
+                        texto: "¿Qué es una clase 'Inline anónima'?",
+                        opciones: ["Una clase definida dentro de un record.", "Una clase que no tiene métodos.", "Una clase sin nombre que se define e instancia en una sola operación.", "Una clase que solo tiene atributos estáticos."],
+                        correcta: 2,
+                        aclaracion: "Se utilizan para casos puntuales donde se necesita implementar una interfaz o anular un método rápidamente sin crear un archivo o nombre de clase nuevo."
+                    },
+                    {
+                        id: 24,
+                        texto: "¿Qué palabra se usa junto a 'sealed' para restringir la herencia a clases específicas?",
+                        opciones: ["extends", "only", "permits", "non-sealed"],
+                        correcta: 2,
+                        aclaracion: "Las clases selladas restringen su descendencia listando explícitamente qué clases tienen permiso para heredar de ellas mediante la palabra permits."
+                    },
+                    {
+                        id: 25,
+                        texto: "En clases selladas, ¿qué significa que una subclase sea 'non-sealed'?",
+                        opciones: ["Que la clase vuelve a ser un record.", "Que la clase hija se puede extender sin restricciones.", "Que la clase no puede tener métodos.", "Que la herencia se detiene en ese punto."],
+                        correcta: 1,
+                        aclaracion: "Al declarar una hija como non-sealed, se rompe la restricción de sellado de la superclase, permitiendo que a partir de ahí cualquier clase pueda heredar de ella."
+                    }
+                ]
+            }
+        }
     }
 };
 
@@ -2335,12 +2521,15 @@ function obtenerTodasLasPreguntas(temaId) {
     return todasLasPreguntas;
 }
 
-// Función para obtener todas las preguntas de todos los temas
+// Función para obtener todas las preguntas de todos los temas (excluyendo testResumen)
 function obtenerTodasLasPreguntasGlobales() {
     let todasLasPreguntas = [];
     Object.keys(temasData).forEach(temaKey => {
-        const preguntasTema = obtenerTodasLasPreguntas(temaKey);
-        todasLasPreguntas = todasLasPreguntas.concat(preguntasTema);
+        // Excluir testResumen del test global
+        if (temaKey !== 'testResumen') {
+            const preguntasTema = obtenerTodasLasPreguntas(temaKey);
+            todasLasPreguntas = todasLasPreguntas.concat(preguntasTema);
+        }
     });
     return todasLasPreguntas;
 }

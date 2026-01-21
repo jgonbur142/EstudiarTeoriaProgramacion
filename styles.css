@@ -413,6 +413,16 @@ header h1 {
     font-size: 1.1rem;
     font-weight: bold;
     text-align: center;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.resultado-test strong {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 1rem;
 }
 
 .resultado-test.correcto {

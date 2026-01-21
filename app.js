@@ -245,6 +245,12 @@ function cargarTemas() {
     if (testGlobalCard) {
         testGlobalCard.onclick = iniciarTestGlobal;
     }
+    
+    // Configurar el test resumen
+    const testResumenCard = document.getElementById('test-resumen-card');
+    if (testResumenCard) {
+        testResumenCard.onclick = iniciarTestResumen;
+    }
 }
 
 // Mostrar índice de temas
@@ -435,6 +441,47 @@ function iniciarTestGlobal() {
     mostrarPreguntaTest();
 }
 
+// Obtener preguntas del test resumen
+function obtenerPreguntasTestResumen() {
+    const resumen = temasData['testResumen'];
+    if (!resumen) return [];
+    
+    let preguntas = [];
+    Object.values(resumen.subtemas).forEach(subtema => {
+        preguntas = preguntas.concat(subtema.preguntas);
+    });
+    return preguntas;
+}
+
+// Iniciar test resumen
+function iniciarTestResumen() {
+    const preguntasResumen = obtenerPreguntasTestResumen();
+    
+    if (preguntasResumen.length === 0) {
+        alert('No hay preguntas de resumen disponibles.');
+        return;
+    }
+    
+    // Mezclar preguntas aleatoriamente
+    estadoApp.preguntasTest = mezclarArray([...preguntasResumen]);
+    estadoApp.preguntaActualIndex = 0;
+    estadoApp.testActivo = true;
+    estadoApp.temaActual = 'testResumen'; // Marcar como test resumen
+    estadoApp.respuestasUsuario = {}; // Resetear respuestas
+    estadoApp.estadisticas.correctas = 0;
+    estadoApp.estadisticas.incorrectas = 0;
+    
+    ocultarTodasLasVistas();
+    document.getElementById('test-view').classList.add('active');
+    
+    // Mostrar controles de navegación
+    const navControls = document.querySelector('.test-navigation-controls');
+    if (navControls) navControls.style.display = 'block';
+    
+    crearSelectorPreguntas();
+    mostrarPreguntaTest();
+}
+
 // Crear selector de preguntas
 function crearSelectorPreguntas() {
     const selector = document.getElementById('pregunta-selector');
@@ -549,11 +596,19 @@ function mostrarPreguntaTest() {
         resultadoDiv.classList.remove('hidden');
         if (respuestaGuardada.correcta) {
             resultadoDiv.className = 'resultado-test correcto';
-            resultadoDiv.textContent = '✓ ¡Correcto!';
+            let mensaje = '✓ ¡Correcto!';
+            if (pregunta.aclaracion) {
+                mensaje += `<br><br><strong>Aclaración:</strong><br>${pregunta.aclaracion}`;
+            }
+            resultadoDiv.innerHTML = mensaje;
         } else {
             resultadoDiv.className = 'resultado-test incorrecto';
             const textoOpcion = pregunta.opciones[pregunta.correcta];
-            resultadoDiv.textContent = `✗ Incorrecto. La respuesta correcta es: ${String.fromCharCode(65 + pregunta.correcta)}. ${textoOpcion}`;
+            let mensaje = `✗ Incorrecto. La respuesta correcta es: ${String.fromCharCode(65 + pregunta.correcta)}. ${textoOpcion}`;
+            if (pregunta.aclaracion) {
+                mensaje += `<br><br><strong>Aclaración:</strong><br>${pregunta.aclaracion}`;
+            }
+            resultadoDiv.innerHTML = mensaje;
         }
         document.getElementById('siguiente-btn').classList.add('hidden');
     } else {
@@ -593,11 +648,19 @@ function seleccionarOpcion(indiceSeleccionado, indiceCorrecto) {
     const pregunta = estadoApp.preguntasTest[preguntaIndex];
     if (esCorrecta) {
         resultadoDiv.className = 'resultado-test correcto';
-        resultadoDiv.textContent = '✓ ¡Correcto!';
+        let mensaje = '✓ ¡Correcto!';
+        if (pregunta.aclaracion) {
+            mensaje += `<br><br><strong>Aclaración:</strong><br>${pregunta.aclaracion}`;
+        }
+        resultadoDiv.innerHTML = mensaje;
     } else {
         resultadoDiv.className = 'resultado-test incorrecto';
         const textoOpcion = pregunta.opciones[indiceCorrecto];
-        resultadoDiv.textContent = `✗ Incorrecto. La respuesta correcta es: ${String.fromCharCode(65 + indiceCorrecto)}. ${textoOpcion}`;
+        let mensaje = `✗ Incorrecto. La respuesta correcta es: ${String.fromCharCode(65 + indiceCorrecto)}. ${textoOpcion}`;
+        if (pregunta.aclaracion) {
+            mensaje += `<br><br><strong>Aclaración:</strong><br>${pregunta.aclaracion}`;
+        }
+        resultadoDiv.innerHTML = mensaje;
     }
     
     // Actualizar selector
@@ -687,7 +750,7 @@ function finalizarTest() {
 
 // Terminar test desde el botón
 function terminarTestDesdeBoton() {
-    if (estadoApp.temaActual === 'global') {
+    if (estadoApp.temaActual === 'global' || estadoApp.temaActual === 'testResumen') {
         mostrarIndice();
     } else {
         mostrarOpcionesTema();
