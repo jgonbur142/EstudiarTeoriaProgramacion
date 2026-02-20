@@ -615,6 +615,20 @@ header h1 {
     .opcion-btn {
         width: 100%;
     }
+
+    /* En móvil, apilar botones de trimestres como los botones de tema */
+    .trimestres-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .trimestres-container .trim-btn {
+        width: 100%;
+        max-width: 420px;
+        min-width: unset;
+        padding: 16px 20px;
+    }
     
     .test-header {
         flex-direction: column;
