@@ -15,18 +15,19 @@
         <!-- Vista de índice de temas -->
         <div id="index-view" class="view active">
             <h2>Selecciona un tema</h2>
+            <div class="trimestres-container">
+                <button class="trim-btn" data-trim="1">1er Trimestre</button>
+                <button class="trim-btn" data-trim="2">2º Trimestre</button>
+            </div>
             <div id="temas-list" class="temas-grid">
                 <!-- Los temas se cargarán dinámicamente -->
             </div>
             <div id="test-global-container" style="margin-top: 30px; text-align: center;">
-                <div id="test-global-card" class="tema-card" style="max-width: 300px; margin: 0 auto; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                <div id="test-global-card" class="tema-card hidden" style="max-width: 300px; margin: 0 auto; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
                     <h3>🌍 Test Global</h3>
                     <p>Test con todas las preguntas</p>
                 </div>
-                <div id="test-resumen-card" class="tema-card" style="max-width: 300px; margin: 20px auto 0; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-                    <h3>📝 Test Resumen</h3>
-                    <p>Conceptos clave resumidos</p>
-                </div>
+                <!-- El card de Test Resumen se genera dinámicamente sólo para 1er Trimestre -->
             </div>
         </div>
 

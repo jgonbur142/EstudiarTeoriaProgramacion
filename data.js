@@ -2320,6 +2320,99 @@ const temasData = {
             }
         }
     },
+    tema9: {
+        id: 9,
+        titulo: "Tema 9 - Expresiones Regulares",
+        subtemas: {
+            "9.1": {
+                titulo: "Tema 9 - Expresiones Regulares",
+                preguntas: [
+                    { id: 1, texto: "¿Qué es esencialmente una expresión regular?", opciones: ["Un tipo de dato primitivo para almacenar texto.", "Una secuencia de caracteres que forma un patrón de búsqueda.", "Una clase de Java que solo sirve para validar números de teléfono.", "Un método de la clase Object para comparar objetos."], correcta: 1 },
+                    { id: 2, texto: "¿Qué método de la clase String permite comprobar si una cadena coincide con una expresión regular?", opciones: ["contains(regex)", "equals(regex)", "matches(regex)", "compare(regex)"], correcta: 2 },
+                    { id: 3, texto: "En una cadena de Java, ¿cómo se debe escribir la expresión regular para una sola barra invertida \\?", opciones: ["\\", "\\\\", "\\\\", "\\\\\\\\"], correcta: 3 },
+                    { id: 4, texto: "¿Qué representa el operador lógico | en una expresión regular?", opciones: ["Concatenación de dos patrones.", "Alternancia (un patrón u otro).", "Que el carácter debe aparecer al principio.", "Que el carácter es opcional."], correcta: 1 },
+                    { id: 5, texto: "¿Qué significa la clase de caracteres [^abc]?", opciones: ["Cualquier cadena que empiece por a, b o c.", "Solo los caracteres a, b y c en ese orden.", "Cualquier carácter excepto a, b o c.", "Una cadena que contiene a, b y c opcionalmente."], correcta: 2 },
+                    { id: 6, texto: "¿Cuál es el significado del punto . como metacarácter predefinido?", opciones: ["Representa el final de una frase.", "Coincide con cualquier carácter (excepto terminadores de línea por defecto).", "Coincide únicamente con un punto literal.", "Indica que el siguiente carácter es especial."], correcta: 1 },
+                    { id: 7, texto: "¿Qué clase de carácter predefinida se utiliza para representar \"cualquier dígito\"?", opciones: ["\\s", "\\w", "\\d", "\\D"], correcta: 2 },
+                    { id: 8, texto: "¿Qué representa el metacarácter \\w?", opciones: ["Solo caracteres alfabéticos (a-z).", "Cualquier carácter que no sea una palabra.", "Un carácter de palabra (letras, dígitos y guion bajo).", "Espacios en blanco y tabuladores."], correcta: 2 },
+                    { id: 9, texto: "¿Cuál es la clase POSIX para representar caracteres en mayúscula?", opciones: ["\\p{Lower}", "\\p{Upper}", "\\p{Alpha}", "\\p{ASCII}"], correcta: 1 },
+                    { id: 10, texto: "¿Qué busca el delimitador (boundary matcher) \\b?", opciones: ["El final de una línea.", "Un carácter que no sea de palabra.", "Un límite de palabra (principio o final).", "Un salto de página."], correcta: 2 },
+                    { id: 11, texto: "En los cuantificadores codiciosos (greedy), ¿qué significa el símbolo +?", opciones: ["Aparece cero o una vez.", "Aparece exactamente una vez.", "Aparece una o más veces.", "Aparece cero o más veces."], correcta: 2 },
+                    { id: 12, texto: "¿Qué cuantificador indica que un elemento puede aparecer \"cero o más veces\"?", opciones: ["?", "*", "{1,}", "^"], correcta: 1 },
+                    { id: 13, texto: "¿Cómo se define que un patrón debe aparecer \"al menos n veces\"?", opciones: ["{n}", "{,n}", "{n,}", "{n,m}"], correcta: 2 },
+                    { id: 14, texto: "¿En qué paquete se encuentran las clases Pattern y Matcher?", opciones: ["java.lang", "java.io", "java.util.regex", "java.text"], correcta: 2 },
+                    { id: 15, texto: "¿Para qué sirve el método Pattern.compile(String regex)?", opciones: ["Para crear un objeto Pattern a partir de una expresión regular.", "Para ejecutar la búsqueda directamente en un texto.", "Para traducir la regex a código máquina.", "Para validar si una cadena es una regex válida sin guardarla."], correcta: 0 },
+                    { id: 16, texto: "¿Cuál es la diferencia entre los métodos matches() y find() de la clase Matcher?", opciones: ["No hay diferencia, hacen lo mismo.", "find() busca al principio y matches() al final.", "matches() intenta coincidir con todo el texto, mientras que find() busca subsecuencias.", "matches() es más rápido que find()."], correcta: 2 },
+                    { id: 17, texto: "¿Qué método de Matcher devuelve el índice donde empieza la última coincidencia encontrada?", opciones: ["start()", "end()", "index()", "offset()"], correcta: 0 },
+                    { id: 18, texto: "¿Cómo se marcan los \"grupos\" en una expresión regular?", opciones: ["Con corchetes [].", "Con llaves {}.", "Con paréntesis ().", "Con barras inclinadas //."], correcta: 2 },
+                    { id: 19, texto: "¿Qué bandera (flag) permite que el punto . coincida también con terminadores de línea?", opciones: ["Pattern.CASE_INSENSITIVE", "Pattern.DOTALL", "Pattern.MULTILINE", "Pattern.UNIX_LINES"], correcta: 1 },
+                    { id: 20, texto: "¿Qué método usarías para cambiar todas las apariciones de un patrón por un texto nuevo?", opciones: ["replaceFirst()", "updateAll()", "replaceAll()", "setAll()"], correcta: 2 }
+                ]
+            }
+        }
+    },
+    tema10: {
+        id: 10,
+        titulo: "Tema 10 - Fechas",
+        subtemas: {
+            "10.1": {
+                titulo: "Tema 10 - Fechas",
+                preguntas: [
+                    { id: 1, texto: "¿Cuál es una de las principales ventajas de la API de fechas introducida en Java 8 (paquete java.time) respecto a la anterior?", opciones: ["Permite modificar los objetos fecha mediante métodos setter.", "Es mutable pero más rápida.", "Es inmutable y thread-safe.", "Solo funciona con el calendario americano."], correcta: 2 },
+                    { id: 2, texto: "¿Qué método se utiliza para obtener la configuración regional por defecto de la JVM?", opciones: ["Locale.default()", "Locale.getDefault()", "Locale.current()", "Locale.systemLocale()"], correcta: 1 },
+                    { id: 3, texto: "¿Qué devuelve el siguiente código?\n\nMonth month = Month.APRIL;\nMonth result = month.plus(3);\nSystem.out.println(result);", opciones: ["JULY", "JUNE", "AUGUST", "MAY"], correcta: 0 },
+                    { id: 4, texto: "¿Qué valor devuelve la siguiente instrucción?\n\nDayOfWeek.of(7)", opciones: ["MONDAY", "SUNDAY", "SATURDAY", "Lanza excepción"], correcta: 1 },
+                    { id: 5, texto: "¿Qué método se utiliza para crear un objeto LocalDate a partir de una cadena como \"2024-03-22\"?", opciones: ["LocalDate.of(\"2024-03-22\")", "LocalDate.from(\"2024-03-22\")", "LocalDate.parse(\"2024-03-22\")", "LocalDate.new(\"2024-03-22\")"], correcta: 2 },
+                    { id: 6, texto: "¿Qué devuelve el siguiente código?\n\nLocalDate date = LocalDate.of(2024, 2, 8);\nint month = date.getMonthValue();\nSystem.out.println(month);", opciones: ["FEBRUARY", "2", "8", "2024"], correcta: 1 },
+                    { id: 7, texto: "¿Qué método de YearMonth permite saber cuántos días tiene ese mes concreto?", opciones: ["getDays()", "daysInMonth()", "lengthOfMonth()", "getMonthLength()"], correcta: 2 },
+                    { id: 8, texto: "¿Qué devuelve el siguiente código?\n\nMonthDay md = MonthDay.of(Month.FEBRUARY, 29);\nSystem.out.println(md.isValidYear(2010));", opciones: ["true", "false", "29", "Lanza excepción"], correcta: 1 },
+                    { id: 9, texto: "¿Qué método de la clase Year permite comprobar si un año es bisiesto?", opciones: ["isLeap()", "isBisiesto()", "isLeapYear()", "checkLeap()"], correcta: 0 },
+                    { id: 10, texto: "¿Qué devuelve el siguiente código?\n\nLocalTime time = LocalTime.of(15, 30, 25);\nSystem.out.println(time.getHour());", opciones: ["30", "25", "15", "153025"], correcta: 2 },
+                    { id: 11, texto: "¿Cuál de los siguientes métodos devuelve la fecha y hora actual del sistema?", opciones: ["LocalDateTime.of()", "LocalDateTime.now()", "LocalDateTime.parse()", "LocalDateTime.create()"], correcta: 1 },
+                    { id: 12, texto: "¿Qué clase se utiliza para dar formato a fechas y horas en Java 8?", opciones: ["DateFormat", "SimpleDateFormat", "DateTimeFormatter", "DateFormatter"], correcta: 2 },
+                    { id: 13, texto: "¿Cuál es la diferencia principal entre el patrón y y u en DateTimeFormatter?", opciones: ["No hay diferencia nunca", "y muestra el año de la era, u muestra el año proléptico", "y muestra siempre cuatro dígitos, u siempre dos", "y es para meses, u es para días"], correcta: 1 },
+                    { id: 14, texto: "¿Cuál de las siguientes clases representa un período en años, meses y días?", opciones: ["Duration", "Period", "ChronoUnit", "TimeUnit"], correcta: 1 },
+                    { id: 15, texto: "¿Qué devuelve el siguiente código?\n\nDuration duration = Duration.ofMinutes(10);\nSystem.out.println(duration.toSeconds());", opciones: ["10", "60", "600", "1000"], correcta: 2 },
+                    { id: 16, texto: "¿Qué clase o enum permite hacer sleep o retrasos de tiempo en Java?", opciones: ["Duration", "TimeUnit", "Period", "ChronoUnit"], correcta: 1 },
+                    { id: 17, texto: "¿Cuál de los siguientes enums representa los días de la semana en Java 8?", opciones: ["Month", "DayOfWeek", "WeekDay", "ChronoDay"], correcta: 1 },
+                    { id: 18, texto: "¿Qué método de DayOfWeek devuelve el día de la semana correspondiente a un número del 1 al 7?", opciones: ["getDayOfWeek(int)", "of(int)", "valueOf(int)", "from(int)"], correcta: 1 },
+                    { id: 19, texto: "¿Qué clase permite representar únicamente un mes y un año sin un día concreto?", opciones: ["LocalDate", "MonthDay", "YearMonth", "Year"], correcta: 2 },
+                    { id: 20, texto: "¿Cuál de las siguientes clases se utiliza para representar solo la hora del día (hora, minutos, segundos) sin fecha?", opciones: ["LocalTime", "LocalDateTime", "DateTimeFormatter", "TimeUnit"], correcta: 0 }
+                ]
+            }
+        }
+    },
+    tema11: {
+        id: 11,
+        titulo: "Tema 11 - Genéricos",
+        subtemas: {
+            "11.1": {
+                titulo: "Tema 11 - Genéricos",
+                preguntas: [
+                    { id: 1, texto: "¿Qué significa que una clase sea genérica en Java?", opciones: ["Que puede extender cualquier clase.", "Que su tipo de datos se especifica como parámetro.", "Que no puede tener constructores.", "Que solo funciona con tipos primitivos."], correcta: 1 },
+                    { id: 2, texto: "¿Cuál de estas afirmaciones es correcta respecto a los métodos genéricos?", opciones: ["Solo se pueden declarar dentro de clases genéricas.", "Deben devolver siempre un tipo genérico.", "Se declaran con <T> antes del tipo de retorno.", "No pueden ser estáticos."], correcta: 2 },
+                    { id: 3, texto: "¿Qué operador se utiliza para permitir que el compilador infiera el tipo al instanciar una clase genérica?", opciones: ["<>", "{}", "[]", "()"], correcta: 0 },
+                    { id: 4, texto: "¿Qué ocurre si intentamos asignar un GenericClass<Double> a un GenericClass<Integer>?", opciones: ["La conversión se hace automáticamente.", "Genera un error en tiempo de ejecución.", "Genera un error de compilación.", "Se asigna correctamente solo si usamos var."], correcta: 2 },
+                    { id: 5, texto: "¿Qué clase wrapper se usa para que los genéricos puedan trabajar con tipos primitivos?", opciones: ["Object", "String", "Clases envoltorio como Integer o Double", "ArrayList"], correcta: 2 },
+                    { id: 6, texto: "¿Cuál de las siguientes afirmaciones sobre interfaces genéricas es correcta?", opciones: ["No pueden ser implementadas por clases genéricas.", "Pueden implementar parámetros de tipo que luego se concretan o se mantienen genéricos.", "Solo pueden tener métodos estáticos.", "No pueden declarar tipos de retorno genéricos."], correcta: 1 },
+                    { id: 7, texto: "Si queremos que un parámetro genérico solo acepte tipos numéricos, ¿cómo lo declaramos?", opciones: ["<T extends Object>", "<T extends Number>", "<T super Number>", "<T extends Integer>"], correcta: 1 },
+                    { id: 8, texto: "¿Qué significa Pair<T, V extends T>?", opciones: ["Que T debe ser subclase de V.", "Que V debe ser el mismo tipo que T o subclase de T.", "Que T y V deben ser tipos primitivos.", "Que T y V son intercambiables."], correcta: 1 },
+                    { id: 9, texto: "¿Qué símbolo representa un tipo comodín en Java genéricos?", opciones: ["%", "?", "*", "#"], correcta: 1 },
+                    { id: 10, texto: "¿Cuál es la ventaja principal de usar genéricos?", opciones: ["Reducen el tamaño del código compilado.", "Permiten reutilizar algoritmos para distintos tipos de datos.", "Permiten usar tipos primitivos directamente.", "Aumentan la velocidad de ejecución."], correcta: 1 },
+                    { id: 11, texto: "¿Qué ocurrirá si declaramos una variable estática de tipo genérico en una clase genérica?", opciones: ["Compilará correctamente.", "Solo compila si usamos un tipo concreto.", "No se permite.", "Solo funciona en Java 8 o superior."], correcta: 2 },
+                    { id: 12, texto: "¿Cuál es la salida del siguiente código?\nGenericClass<String> gen = new GenericClass(\"Hola\");\ngen.show();", opciones: ["El tipo de T es String ---> Valor del atributo: Hola", "El tipo de T es Object ---> Valor del atributo: Hola", "El tipo de T es GenericClass ---> Valor del atributo: Hola", "Error de compilación"], correcta: 0 },
+                    { id: 13, texto: "¿Qué se necesita para comparar tamaños de arrays en distintas instancias genéricas sin error de compilación?", opciones: ["Declarar equalSize(GenericClass<T> gen)", "Usar un tipo comodín: equalSize(GenericClass<?> gen)", "Convertir ambos arrays a Object[]", "Crear un método estático"], correcta: 1 },
+                    { id: 14, texto: "¿Cuál de estas declaraciones de clase genérica con varios tipos es correcta?", opciones: ["class GenericClass3<T V>", "class GenericClass3<T, V>", "class GenericClass3<T; V>", "class GenericClass3<T V>"], correcta: 1 },
+                    { id: 15, texto: "¿Cuál de las siguientes no es una característica de los genéricos en Java?", opciones: ["Permiten reutilización de código.", "Pueden trabajar con tipos primitivos directamente.", "Mejoran la seguridad de tipos en compilación.", "Pueden aplicarse a clases, métodos e interfaces."], correcta: 1 },
+                    { id: 16, texto: "En la declaración public <T> String showType(T parameter), ¿qué significa <T>?", opciones: ["Que el método devuelve un tipo T.", "Que el método es genérico y T es un parámetro de tipo.", "Que la clase donde está es genérica.", "Que el parámetro debe ser un número."], correcta: 1 },
+                    { id: 17, texto: "¿Cuál de las siguientes es una limitación de los genéricos?", opciones: ["No permiten instanciar objetos con new T().", "No permiten usar métodos genéricos.", "No pueden implementarse en interfaces.", "No funcionan con ArrayList."], correcta: 0 },
+                    { id: 18, texto: "¿Qué pasa si sobrecargamos dos métodos method(T ob) y method(V ob) en la misma clase genérica con T y V?", opciones: ["Funciona sin problemas.", "Puede generar error de compilación si T y V pueden ser del mismo tipo.", "Solo compila en Java 8 o superior.", "No genera advertencias ni errores."], correcta: 1 },
+                    { id: 19, texto: "Si una clase implementa GenericInterface<Vehicle>, ¿qué tipo deben tener los métodos first y last?", opciones: ["T", "Object", "Vehicle", "?"], correcta: 2 },
+                    { id: 20, texto: "¿Cuál es la utilidad de los tipos comodín (?) en Java?", opciones: ["Permitir usar arrays de tipo genérico.", "Representar un tipo desconocido, útil para trabajar con distintas traducciones de genéricos.", "Reemplazar los métodos genéricos.", "Limitar un parámetro a un tipo numérico."], correcta: 1 }
+                ]
+            }
+        }
+    },
     testResumen: {
         id: 'resumen',
         titulo: "Test Resumen - Conceptos Clave",
@@ -2532,4 +2625,24 @@ function obtenerTodasLasPreguntasGlobales() {
         }
     });
     return todasLasPreguntas;
+}
+
+// Obtener preguntas globales por trimestre: 1 => temas 1-7, 2 => temas 8-11
+function obtenerPreguntasGlobalPorTrimestre(trimestre) {
+    const ranges = {
+        1: [1, 7],
+        2: [8, 11]
+    };
+    const rango = ranges[trimestre];
+    if (!rango) return [];
+
+    let todas = [];
+    Object.keys(temasData).forEach(temaKey => {
+        const tema = temasData[temaKey];
+        const idNum = typeof tema.id === 'number' ? tema.id : null;
+        if (idNum !== null && idNum >= rango[0] && idNum <= rango[1]) {
+            todas = todas.concat(obtenerTodasLasPreguntas(temaKey));
+        }
+    });
+    return todas;
 }

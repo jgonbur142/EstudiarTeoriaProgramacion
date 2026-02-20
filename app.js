@@ -13,6 +13,9 @@ let estadoApp = {
     }
 };
 
+// Estado de filtro por trimestre: null = todos, 1 = 1er trimestre, 2 = 2º trimestre
+estadoApp.trimestreSelected = null;
+
 // Funciones para formatear código
 function formatearCodigo(texto) {
     if (!texto) return '';
@@ -123,6 +126,29 @@ function formatearCodigo(texto) {
     return resultado;
 }
 
+// Filtrar temas por trimestre (1 o 2). Llamar con 1, 2 o null para mostrar todos.
+function filtrarTrimestre(numero) {
+    if (numero !== 1 && numero !== 2) {
+        estadoApp.trimestreSelected = null;
+    } else {
+        estadoApp.trimestreSelected = numero;
+    }
+
+    // Actualizar estado visual de los botones
+    document.querySelectorAll('.trim-btn').forEach(btn => {
+        btn.classList.remove('selected');
+    });
+    if (numero === 1) {
+        const b = document.querySelector('.trim-btn[onclick="filtrarTrimestre(1)"]');
+        if (b) b.classList.add('selected');
+    } else if (numero === 2) {
+        const b = document.querySelector('.trim-btn[onclick="filtrarTrimestre(2)"]');
+        if (b) b.classList.add('selected');
+    }
+
+    cargarTemas();
+}
+
 function formatearBloqueCodigo(codigo) {
     // Limpiar y formatear el código
     let codigoLimpio = codigo.trim();
@@ -215,15 +241,62 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Inicializar estado del botón
     toggleScrollButton();
+    
+    // Conectar botones de trimestre (usamos data-trim en HTML)
+    document.querySelectorAll('.trim-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const val = btn.getAttribute('data-trim');
+            const num = val ? parseInt(val, 10) : null;
+            filtrarTrimestre(num);
+        });
+    });
 });
 
 // Cargar temas en el índice
 function cargarTemas() {
     const temasList = document.getElementById('temas-list');
     temasList.innerHTML = '';
-    
+    const filtro = estadoApp.trimestreSelected; // null, 1 o 2
+    const header = document.querySelector('#index-view h2');
+
+    // Si no se ha seleccionado trimestre, mostrar solo los botones (no cargar temas)
+    const testGlobalCard = document.getElementById('test-global-card');
+    const testResumenCard = document.getElementById('test-resumen-card');
+    if (!filtro) {
+        // ocultar lista de temas y cards de test
+        temasList.innerHTML = '';
+        if (testGlobalCard) testGlobalCard.classList.add('hidden');
+        if (testResumenCard) testResumenCard.classList.add('hidden');
+        if (header) header.textContent = 'Selecciona un trimestre';
+        return;
+    } else if (filtro === 1) {
+        if (header) header.textContent = '1er Trimestre — Temas 1 a 7';
+        if (testGlobalCard) testGlobalCard.classList.remove('hidden');
+        if (testResumenCard) testResumenCard.classList.remove('hidden');
+    } else if (filtro === 2) {
+        if (header) header.textContent = '2º Trimestre — Temas 8 a 11';
+        // Ocultar los cards globales genéricos y mostrar un card específico para 2º Trimestre
+        if (testGlobalCard) testGlobalCard.classList.add('hidden');
+        if (testResumenCard) testResumenCard.classList.add('hidden');
+    }
+
     Object.keys(temasData).forEach(temaKey => {
         const tema = temasData[temaKey];
+        // Algunos keys como 'testResumen' no tienen id numérico
+        const idNum = typeof tema.id === 'number' ? tema.id : null;
+
+        // Aplicar filtro de trimestre si está seleccionado
+        if (filtro === 1 && idNum !== null && idNum > 7) return;
+        if (filtro === 2) {
+            // En el 2º trimestre solo permitimos temas numéricos del 8 al 11
+            if (idNum !== null && (idNum < 8 || idNum > 11)) return;
+            // Omitir entradas especiales como 'testResumen'
+            if (temaKey === 'testResumen') return;
+        } else {
+            // filtro === 1: omitir temas numéricos fuera de 1-7
+            if (idNum !== null && (idNum < 1 || idNum > 7)) return;
+        }
+
         const temaCard = document.createElement('div');
         temaCard.className = 'tema-card';
         temaCard.onclick = () => mostrarOpcionesTema(temaKey);
@@ -232,24 +305,68 @@ function cargarTemas() {
         const tituloSinNumero = tema.titulo.replace(/^Tema \d+\s*-\s*/, '');
         
         temaCard.innerHTML = `
-            <h3>Tema ${tema.id}</h3>
-            <p style="font-weight: bold; margin-top: 5px;">${tituloSinNumero}</p>
+            <h3>${idNum ? 'Tema ' + idNum : tema.titulo}</h3>
+            <p style="font-weight: bold; margin-top: 5px;">${tituloSinNumero || tema.titulo}</p>
             <p style="font-size: 0.85rem; opacity: 0.9; margin-top: 5px;">Haz clic para ver las opciones</p>
         `;
         
         temasList.appendChild(temaCard);
     });
     
-    // Configurar el test global
-    const testGlobalCard = document.getElementById('test-global-card');
+    // Configurar el test global (usar variables ya obtenidas arriba)
     if (testGlobalCard) {
-        testGlobalCard.onclick = iniciarTestGlobal;
+        // Para 1er trimestre el card global existente se usa; para 2º lo ocultamos arriba y mostraremos uno específico
+        testGlobalCard.onclick = () => iniciarTestGlobal(estadoApp.trimestreSelected);
     }
     
     // Configurar el test resumen
-    const testResumenCard = document.getElementById('test-resumen-card');
     if (testResumenCard) {
         testResumenCard.onclick = iniciarTestResumen;
+    }
+
+    // Contenedor para cards de test adicionales
+    const testGlobalContainer = document.getElementById('test-global-container');
+
+    // Manejar card específico para 2º Trimestre y Test Resumen dinámico para 1er Trimestre
+    const existingTrim2 = document.getElementById('test-global-trim2');
+    const existingResumen = document.getElementById('test-resumen-card');
+
+    if (filtro === 2) {
+        // Eliminar cualquier card de resumen si existe
+        if (existingResumen && existingResumen.parentNode) existingResumen.parentNode.removeChild(existingResumen);
+
+        // Crear card si no existe
+        if (!existingTrim2 && testGlobalContainer) {
+            const card = document.createElement('div');
+            card.id = 'test-global-trim2';
+            card.className = 'tema-card';
+            card.style.maxWidth = '420px';
+            card.style.margin = '20px auto 0';
+            card.style.background = 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)';
+            card.innerHTML = `<h3>🌍 Test Global 2º Trimestre</h3><p>Test con preguntas de los temas 8 a 11</p>`;
+            card.onclick = () => iniciarTestGlobal(2);
+            testGlobalContainer.appendChild(card);
+        }
+    } else if (filtro === 1) {
+        // En 1er trimestre: eliminar card de 2º si existe
+        if (existingTrim2 && existingTrim2.parentNode) existingTrim2.parentNode.removeChild(existingTrim2);
+
+        // Asegurar que exista el card resumen (crearlo si hace falta)
+        if (!existingResumen && testGlobalContainer) {
+            const resumen = document.createElement('div');
+            resumen.id = 'test-resumen-card';
+            resumen.className = 'tema-card';
+            resumen.style.maxWidth = '300px';
+            resumen.style.margin = '20px auto 0';
+            resumen.style.background = 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)';
+            resumen.innerHTML = `<h3>📝 Test Resumen</h3><p>Conceptos clave resumidos</p>`;
+            resumen.onclick = iniciarTestResumen;
+            testGlobalContainer.appendChild(resumen);
+        }
+    } else {
+        // Ningún filtro: eliminar ambos extras si existen
+        if (existingTrim2 && existingTrim2.parentNode) existingTrim2.parentNode.removeChild(existingTrim2);
+        if (existingResumen && existingResumen.parentNode) existingResumen.parentNode.removeChild(existingResumen);
     }
 }
 
@@ -282,7 +399,7 @@ function generarEnlacesTemario(temaKey) {
         
         subtemas.forEach(subtema => {
             const link = document.createElement('a');
-            link.href = `temario/${subtema.archivo}`;
+            link.href = `temario/${encodeURIComponent(subtema.archivo)}`;
             link.target = '_blank';
             link.className = 'temario-link';
             link.innerHTML = `<span class="temario-icon">📄</span> <span>${subtema.num} - ${subtema.nombre}</span>`;
@@ -296,7 +413,10 @@ function generarEnlacesTemario(temaKey) {
             5: '5 Programación Orientada a Objetos.pdf',
             6: '6 Excepciones.pdf',
             7: '7 Herencia.pdf',
-            8: '8 Tipos enumerados.pdf'
+            8: '8 Tipos enumerados.pdf',
+            9: '9 Expresiones Regulares.pdf',
+            10: '10 Fechas.pdf',
+            11: '11 Genéricos.pdf'
         };
         
         const archivo = archivosTemario[tema.id];
@@ -305,7 +425,7 @@ function generarEnlacesTemario(temaKey) {
             temarioSection.className = 'temario-section';
             
             const link = document.createElement('a');
-            link.href = `temario/${archivo}`;
+            link.href = `temario/${encodeURIComponent(archivo)}`;
             link.target = '_blank';
             link.className = 'temario-link';
             link.innerHTML = `<span class="temario-icon">📄</span> <span>Temario - Tema ${tema.id}</span>`;
@@ -413,14 +533,21 @@ function iniciarTestAleatorio() {
 }
 
 // Iniciar test global con todas las preguntas de todos los temas
-function iniciarTestGlobal() {
-    const todasLasPreguntas = obtenerTodasLasPreguntasGlobales();
-    
+function iniciarTestGlobal(trimestre = null) {
+    let todasLasPreguntas = [];
+    if (trimestre === 1 || estadoApp.trimestreSelected === 1) {
+        todasLasPreguntas = obtenerPreguntasGlobalPorTrimestre(1);
+    } else if (trimestre === 2 || estadoApp.trimestreSelected === 2) {
+        todasLasPreguntas = obtenerPreguntasGlobalPorTrimestre(2);
+    } else {
+        todasLasPreguntas = obtenerTodasLasPreguntasGlobales();
+    }
+
     if (todasLasPreguntas.length === 0) {
         alert('No hay preguntas disponibles.');
         return;
     }
-    
+
     // Mezclar preguntas aleatoriamente
     estadoApp.preguntasTest = mezclarArray([...todasLasPreguntas]);
     estadoApp.preguntaActualIndex = 0;
@@ -429,14 +556,14 @@ function iniciarTestGlobal() {
     estadoApp.respuestasUsuario = {}; // Resetear respuestas
     estadoApp.estadisticas.correctas = 0;
     estadoApp.estadisticas.incorrectas = 0;
-    
+
     ocultarTodasLasVistas();
     document.getElementById('test-view').classList.add('active');
-    
+
     // Mostrar controles de navegación
     const navControls = document.querySelector('.test-navigation-controls');
     if (navControls) navControls.style.display = 'block';
-    
+
     crearSelectorPreguntas();
     mostrarPreguntaTest();
 }
@@ -776,6 +903,7 @@ function resetearEstado() {
     estadoApp.respuestaSeleccionada = null;
     estadoApp.respuestasUsuario = {};
     estadoApp.estadisticas = { correctas: 0, incorrectas: 0 };
+    estadoApp.trimestreSelected = null;
 }
 
 function mezclarArray(array) {
